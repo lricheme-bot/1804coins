@@ -59,14 +59,11 @@ const FeaturedProducts = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-semibold text-gray-900 mb-4">
             Featured Products
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Commemorative coins honoring the heroes and landmarks of Haiti's revolutionary history
-          </p>
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
