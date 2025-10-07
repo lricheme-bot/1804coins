@@ -1,13 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { products } from '../mockData';
+import { getProducts } from '../services/api';
+import { useCart } from '../context/CartContext';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { ArrowRight, ShoppingCart, Eye } from 'lucide-react';
+import { useToast } from '../hooks/use-toast';
 
 const FeaturedProducts = () => {
-  const featuredProducts = products.filter(p => p.featured);
+  const [featuredProducts, setFeaturedProducts] = useState([]);
+  const { addToCart } = useCart();
+  const { toast } = useToast();
+
+  useEffect(() => {
+    const fetchFeaturedProducts = async () => {
+      try {
+        const products = await getProducts({ featured: true });
+        setFeaturedProducts(products);
+      } catch (error) {
+        console.error('Error fetching featured products:', error);
+      }
+    };
+    fetchFeaturedProducts();
+  }, []);
+
+  const handleAddToCart = async (product) => {
+    const result = await addToCart(product.id);
+    if (result.success) {
+      toast({
+        title: "Added to Cart!",
+        description: `${product.name} has been added to your cart.`,
+      });
+    } else {
+      toast({
+        title: "Error",
+        description: result.error || "Failed to add to cart",
+        variant: "destructive"
+      });
+    }
+  };
 
   const getStatusBadge = (status) => {
     const variants = {
