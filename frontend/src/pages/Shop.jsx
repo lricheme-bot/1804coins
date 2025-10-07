@@ -139,8 +139,8 @@ const Shop = () => {
                   variant={selectedCategory === category.id ? 'default' : 'outline'}
                   className={`${
                     selectedCategory === category.id
-                      ? 'bg-amber-600 hover:bg-amber-700 text-white'
-                      : 'border-amber-300 text-gray-700 hover:bg-amber-50'
+                      ? 'bg-orange-600 hover:bg-orange-700 text-white'
+                      : 'border-gray-300 text-gray-700 hover:bg-gray-100'
                   }`}
                 >
                   {category.name}
