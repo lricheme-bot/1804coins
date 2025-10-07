@@ -6,6 +6,7 @@ import { Textarea } from './ui/textarea';
 import { Label } from './ui/label';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { useToast } from '../hooks/use-toast';
+import { submitContact } from '../services/api';
 
 const ContactSection = () => {
   const { toast } = useToast();
@@ -29,7 +30,6 @@ const ContactSection = () => {
     setIsSubmitting(true);
     
     try {
-      const { submitContact } = await import('../services/api');
       await submitContact(formData);
       
       toast({
@@ -44,6 +44,7 @@ const ContactSection = () => {
         message: ''
       });
     } catch (error) {
+      console.error('Contact form error:', error);
       toast({
         title: "Error",
         description: "Failed to send message. Please try again.",
