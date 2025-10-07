@@ -54,10 +54,9 @@ const Header = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                className="text-gray-700 hover:text-amber-600 font-medium transition-colors relative group"
+                className="text-gray-900 hover:text-gray-600 font-normal transition-colors"
               >
                 {link.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-600 group-hover:w-full transition-all duration-300"></span>
               </Link>
             ))}
           </nav>
