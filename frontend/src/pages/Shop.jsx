@@ -216,6 +216,7 @@ const Shop = () => {
                           <Button 
                             size="sm" 
                             className="bg-amber-600 text-white hover:bg-amber-700"
+                            onClick={() => handleAddToCart(product)}
                           >
                             <ShoppingCart className="h-4 w-4" />
                           </Button>
