@@ -29,19 +29,22 @@ const Header = () => {
   ];
 
   return (
-    <header 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-white/95 backdrop-blur-md shadow-md' 
-          : 'bg-transparent'
-      }`}
-    >
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2 group">
-            <div className="text-2xl font-bold text-amber-900 group-hover:text-amber-700 transition-colors">
-              1804<span className="text-amber-600">Coins</span>
+          <Link to="/" className="flex items-center space-x-3 group">
+            <img 
+              src="https://images.squarespace-cdn.com/content/v1/67d6ef5142cdf803b50d47be/4b6ae5c6-8c9d-4f6d-b9f1-3d8e5c4e8f7a/1804+Coins+Logo.png?format=300w"
+              alt="1804 Coins"
+              className="h-12 w-12 object-contain"
+              onError={(e) => {
+                e.target.style.display = 'none';
+                e.target.nextSibling.style.display = 'block';
+              }}
+            />
+            <div className="text-xl font-semibold text-gray-900" style={{ display: 'block' }}>
+              1804Coins
             </div>
           </Link>
 
