@@ -71,11 +71,20 @@ const ProductDetail = () => {
 
   const statusInfo = getStatusBadge(product.status);
 
-  const handleAddToCart = () => {
-    toast({
-      title: "Added to Cart!",
-      description: `${quantity} x ${product.name} added to your cart.`,
-    });
+  const handleAddToCart = async () => {
+    const result = await addToCart(product.id, quantity);
+    if (result.success) {
+      toast({
+        title: "Added to Cart!",
+        description: `${quantity} x ${product.name} added to your cart.`,
+      });
+    } else {
+      toast({
+        title: "Error",
+        description: result.error || "Failed to add to cart",
+        variant: "destructive"
+      });
+    }
   };
 
   const handleQuantityChange = (delta) => {
