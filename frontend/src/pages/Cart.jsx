@@ -45,7 +45,7 @@ const Cart = () => {
   const total = subtotal + shipping;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
+    <div className="min-h-screen bg-gray-50">
       <Header />
       
       <div className="pt-32 pb-20">
