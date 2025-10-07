@@ -1,30 +1,46 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { useCart } from '../context/CartContext';
 import { Button } from '../components/ui/button';
 import { ArrowLeft, Trash2, Plus, Minus, ShoppingBag } from 'lucide-react';
+import { useToast } from '../hooks/use-toast';
 
 const Cart = () => {
-  // Mock cart items - will be replaced with actual cart state
-  const [cartItems, setCartItems] = useState([]);
+  const { cart, updateCartItem, removeFromCart, loading } = useCart();
+  const { toast } = useToast();
 
-  const updateQuantity = (id, delta) => {
-    setCartItems(items =>
-      items.map(item =>
-        item.id === id
-          ? { ...item, quantity: Math.max(1, item.quantity + delta) }
-          : item
-      )
-    );
+  const updateQuantity = async (productId, newQuantity) => {
+    const result = await updateCartItem(productId, newQuantity);
+    if (!result.success) {
+      toast({
+        title: "Error",
+        description: "Failed to update cart",
+        variant: "destructive"
+      });
+    }
   };
 
-  const removeItem = (id) => {
-    setCartItems(items => items.filter(item => item.id !== id));
+  const handleRemoveItem = async (productId) => {
+    const result = await removeFromCart(productId);
+    if (result.success) {
+      toast({
+        title: "Item Removed",
+        description: "Item has been removed from your cart",
+      });
+    } else {
+      toast({
+        title: "Error",
+        description: "Failed to remove item",
+        variant: "destructive"
+      });
+    }
   };
 
-  const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const cartItems = cart.items || [];
+  const subtotal = cart.subtotal || 0;
   const shipping = subtotal > 0 ? 5.00 : 0;
   const total = subtotal + shipping;
 
