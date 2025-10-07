@@ -28,20 +28,30 @@ const ContactSection = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Mock submission
-    setTimeout(() => {
+    try {
+      const { submitContact } = await import('../services/api');
+      await submitContact(formData);
+      
       toast({
         title: "Message Sent!",
         description: "Thank you for your interest. We'll get back to you soon.",
       });
+      
       setFormData({
         firstName: '',
         lastName: '',
         email: '',
         message: ''
       });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   return (
