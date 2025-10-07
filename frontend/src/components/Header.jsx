@@ -62,36 +62,16 @@ const Header = () => {
           </nav>
 
           {/* Actions */}
-          <div className="flex items-center space-x-4">
-            <Button 
-              variant="ghost" 
-              size="icon"
-              className="hidden md:flex text-gray-700 hover:text-amber-600"
-              onClick={() => navigate('/shop')}
-            >
-              <Search className="h-5 w-5" />
-            </Button>
+          <div className="flex items-center space-x-6">
+            <Link to="/login" className="hidden md:block text-gray-900 hover:text-gray-600 font-normal">
+              Login
+            </Link>
             
             <Button 
-              variant="ghost" 
-              size="icon"
-              className="hidden md:flex text-gray-700 hover:text-amber-600"
-            >
-              <User className="h-5 w-5" />
-            </Button>
-
-            <Button 
-              variant="ghost" 
-              size="icon"
-              className="relative text-gray-700 hover:text-amber-600"
               onClick={() => navigate('/cart')}
+              className="bg-black text-white hover:bg-gray-800 font-normal px-6"
             >
-              <ShoppingCart className="h-5 w-5" />
-              {cartCount > 0 && (
-                <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 bg-amber-600 text-white text-xs">
-                  {cartCount}
-                </Badge>
-              )}
+              Cart ({cartCount})
             </Button>
 
             {/* Mobile Menu Button */}
