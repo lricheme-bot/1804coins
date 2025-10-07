@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { products } from '../mockData';
+import { getProduct, getProducts } from '../services/api';
+import { useCart } from '../context/CartContext';
 import { Button } from '../components/ui/button';
 import { Badge } from '../components/ui/badge';
 import { ShoppingCart, ArrowLeft, Plus, Minus, Heart, Share2 } from 'lucide-react';
@@ -12,9 +13,33 @@ import { useToast } from '../hooks/use-toast';
 const ProductDetail = () => {
   const { id } = useParams();
   const { toast } = useToast();
-  const product = products.find(p => p.id === id);
+  const { addToCart } = useCart();
+  const [product, setProduct] = useState(null);
+  const [relatedProducts, setRelatedProducts] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [isZoomed, setIsZoomed] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchProductData();
+  }, [id]);
+
+  const fetchProductData = async () => {
+    try {
+      setLoading(true);
+      const productData = await getProduct(id);
+      setProduct(productData);
+      
+      // Fetch related products
+      const allProducts = await getProducts({ category: productData.category });
+      const related = allProducts.filter(p => p.id !== id).slice(0, 3);
+      setRelatedProducts(related);
+    } catch (error) {
+      console.error('Error fetching product:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   if (!product) {
     return (
