@@ -103,24 +103,6 @@ const ProductDetail = () => {
     );
   }
 
-  if (!product) {
-    return (
-      <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
-        <Header />
-        <div className="pt-32 pb-20 text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Product Not Found</h1>
-          <Link to="/shop">
-            <Button className="bg-amber-600 hover:bg-amber-700">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Shop
-            </Button>
-          </Link>
-        </div>
-        <Footer />
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
       <Header />
