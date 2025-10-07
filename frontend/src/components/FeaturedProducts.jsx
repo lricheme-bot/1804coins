@@ -79,66 +79,34 @@ const FeaturedProducts = () => {
                 viewport={{ once: true }}
                 className="group"
               >
-                <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                  {/* Image Container */}
-                  <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-amber-100 to-orange-100">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    
-                    {/* Status Badge */}
-                    <Badge className={`absolute top-4 right-4 ${statusInfo.className}`}>
-                      {statusInfo.text}
-                    </Badge>
-
-                    {/* Quick Actions */}
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-2">
-                      <Link to={`/product/${product.id}`}>
-                        <Button 
-                          size="sm" 
-                          className="bg-white text-gray-900 hover:bg-gray-100"
-                        >
-                          <Eye className="h-4 w-4 mr-2" />
-                          View
-                        </Button>
-                      </Link>
-                      {product.inStock && (
-                        <Button 
-                          size="sm" 
-                          className="bg-amber-600 text-white hover:bg-amber-700"
-                          onClick={() => handleAddToCart(product)}
-                        >
-                          <ShoppingCart className="h-4 w-4" />
-                        </Button>
-                      )}
+                <Link to={`/product/${product.id}`} className="block">
+                  <div className="bg-white overflow-hidden transition-all duration-300">
+                    {/* Image Container */}
+                    <div className="relative aspect-square overflow-hidden bg-gray-100">
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-full object-cover group-hover:opacity-90 transition-opacity duration-300"
+                      />
+                      
+                      {/* Status Badge */}
+                      <Badge className={`absolute top-4 right-4 ${statusInfo.className}`}>
+                        {statusInfo.text}
+                      </Badge>
                     </div>
-                  </div>
 
-                  {/* Product Info */}
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-gray-900 mb-1 group-hover:text-amber-600 transition-colors">
-                      {product.name}
-                    </h3>
-                    <p className="text-sm text-gray-600 mb-3">{product.subtitle}</p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-2xl font-bold text-amber-600">
+                    {/* Product Info */}
+                    <div className="p-4 text-center">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-1 underline decoration-1">
+                        {product.name}
+                      </h3>
+                      <p className="text-sm text-gray-600 mb-2">{product.subtitle}</p>
+                      <p className="text-base text-gray-900">
                         ${product.price.toFixed(2)}
-                      </span>
-                      <Link to={`/product/${product.id}`}>
-                        <Button 
-                          variant="ghost" 
-                          size="sm"
-                          className="text-amber-600 hover:text-amber-700 hover:bg-amber-50"
-                        >
-                          Details
-                          <ArrowRight className="ml-1 h-4 w-4" />
-                        </Button>
-                      </Link>
+                      </p>
                     </div>
                   </div>
-                </div>
+                </Link>
               </motion.div>
             );
           })}
