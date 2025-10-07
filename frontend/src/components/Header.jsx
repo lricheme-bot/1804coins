@@ -3,14 +3,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ShoppingCart, Menu, X, User, Search } from 'lucide-react';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
+import { useCart } from '../context/CartContext';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const { cart } = useCart();
   
-  // Mock cart count
-  const cartCount = 0;
+  const cartCount = cart.totalItems || 0;
 
   useEffect(() => {
     const handleScroll = () => {
