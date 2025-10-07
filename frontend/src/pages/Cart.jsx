@@ -116,8 +116,8 @@ const Cart = () => {
                           <Button
                             variant="ghost"
                             size="sm"
-                            onClick={() => updateQuantity(item.id, -1)}
-                            disabled={item.quantity <= 1}
+                            onClick={() => updateQuantity(item.productId, Math.max(1, item.quantity - 1))}
+                            disabled={item.quantity <= 1 || loading}
                             className="hover:bg-amber-50"
                           >
                             <Minus className="h-4 w-4" />
@@ -126,7 +126,8 @@ const Cart = () => {
                           <Button
                             variant="ghost"
                             size="sm"
-                            onClick={() => updateQuantity(item.id, 1)}
+                            onClick={() => updateQuantity(item.productId, item.quantity + 1)}
+                            disabled={loading}
                             className="hover:bg-amber-50"
                           >
                             <Plus className="h-4 w-4" />
@@ -136,7 +137,8 @@ const Cart = () => {
                         <Button
                           variant="ghost"
                           size="sm"
-                          onClick={() => removeItem(item.id)}
+                          onClick={() => handleRemoveItem(item.productId)}
+                          disabled={loading}
                           className="text-red-500 hover:text-red-700 hover:bg-red-50"
                         >
                           <Trash2 className="h-4 w-4 mr-2" />
