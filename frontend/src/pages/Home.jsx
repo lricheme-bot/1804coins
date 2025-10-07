@@ -12,7 +12,7 @@ import Header from '../components/Header';
 
 const Home = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
+    <div className="min-h-screen bg-gray-50">
       <Header />
       <HeroSection />
       <FeaturedProducts />
