@@ -1,18 +1,57 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { products, categories } from '../mockData';
+import { categories } from '../mockData';
+import { getProducts } from '../services/api';
+import { useCart } from '../context/CartContext';
 import { Button } from '../components/ui/button';
 import { Badge } from '../components/ui/badge';
 import { Input } from '../components/ui/input';
-import { ShoppingCart, Eye, Search, Filter } from 'lucide-react';
+import { ShoppingCart, Eye, Search } from 'lucide-react';
+import { useToast } from '../hooks/use-toast';
 
 const Shop = () => {
+  const [products, setProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('name');
+  const [loading, setLoading] = useState(true);
+  const { addToCart } = useCart();
+  const { toast } = useToast();
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    try {
+      setLoading(true);
+      const data = await getProducts();
+      setProducts(data);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleAddToCart = async (product) => {
+    const result = await addToCart(product.id);
+    if (result.success) {
+      toast({
+        title: "Added to Cart!",
+        description: `${product.name} has been added to your cart.`,
+      });
+    } else {
+      toast({
+        title: "Error",
+        description: result.error || "Failed to add to cart",
+        variant: "destructive"
+      });
+    }
+  };
 
   const getStatusBadge = (status) => {
     const variants = {
