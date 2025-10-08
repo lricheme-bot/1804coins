@@ -126,15 +126,19 @@ const Header = () => {
 
           {/* Actions */}
           <div className="flex items-center space-x-6">
-            <Link to="/login" className="hidden md:block text-gray-900 hover:text-gray-600 font-normal">
+            <Link to="/login" className="hidden md:block text-gray-900 hover:text-orange-600 font-medium transition-colors">
               Login
             </Link>
             
             <Button 
               onClick={() => navigate('/cart')}
-              className="bg-black text-white hover:bg-gray-800 font-normal px-6"
+              className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 text-white font-semibold px-6 py-2 shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden group"
             >
-              Cart ({cartCount})
+              <span className="relative z-10 flex items-center">
+                <ShoppingCart className="h-4 w-4 mr-2" />
+                Cart ({cartCount})
+              </span>
+              <div className="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
             </Button>
 
             {/* Mobile Menu Button */}
