@@ -56,20 +56,23 @@ const Footer = () => {
 
           {/* Categories */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Categories</h3>
-            <ul className="space-y-2">
+            <h3 className="text-lg font-bold mb-4 text-orange-500">Categories</h3>
+            <ul className="space-y-3">
               <li>
-                <Link to="/shop?category=revolutionary-leaders" className="text-gray-400 hover:text-amber-500 transition-colors">
+                <Link to="/shop?category=revolutionary-leaders" className="text-gray-300 hover:text-orange-400 transition-colors flex items-center group">
+                  <span className="mr-2 text-orange-600 group-hover:translate-x-1 transition-transform">→</span>
                   Revolutionary Leaders
                 </Link>
               </li>
               <li>
-                <Link to="/shop?category=revolutionary-heroes" className="text-gray-400 hover:text-amber-500 transition-colors">
+                <Link to="/shop?category=revolutionary-heroes" className="text-gray-300 hover:text-orange-400 transition-colors flex items-center group">
+                  <span className="mr-2 text-orange-600 group-hover:translate-x-1 transition-transform">→</span>
                   Revolutionary Heroes
                 </Link>
               </li>
               <li>
-                <Link to="/shop?category=landmarks" className="text-gray-400 hover:text-amber-500 transition-colors">
+                <Link to="/shop?category=landmarks" className="text-gray-300 hover:text-orange-400 transition-colors flex items-center group">
+                  <span className="mr-2 text-orange-600 group-hover:translate-x-1 transition-transform">→</span>
                   Historic Landmarks
                 </Link>
               </li>
