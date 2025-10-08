@@ -36,15 +36,19 @@ const AboutSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="relative"
+            className="relative group"
           >
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+            <div className="absolute -inset-4 bg-gradient-to-r from-orange-400 to-red-500 rounded-3xl opacity-20 group-hover:opacity-30 blur-2xl transition-opacity duration-500"></div>
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white group-hover:scale-105 transition-transform duration-500">
               <img
                 src="https://images.squarespace-cdn.com/content/v1/67d6ef5142cdf803b50d47be/ff3511f4-80e2-4974-8925-ce621e63ab02/Sans-Souci+Palace+Antique+Coin.png"
                 alt="Historic Coin"
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+              <div className="absolute bottom-6 left-6 right-6">
+                <p className="text-white font-bold text-lg">Sans-Souci Palace Commemorative</p>
+              </div>
             </div>
           </motion.div>
 
