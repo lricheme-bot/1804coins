@@ -5,24 +5,30 @@ import { Calendar } from 'lucide-react';
 
 const Timeline = () => {
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-amber-50" id="timeline">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-24 bg-gradient-to-b from-white via-gray-50 to-white relative overflow-hidden" id="timeline">
+      {/* Background decoration */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-500 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500 rounded-full blur-3xl"></div>
+      </div>
+      
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <div className="inline-flex items-center space-x-2 bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-sm font-medium mb-4">
-            <Calendar className="h-4 w-4" />
-            <span>Historic Timeline</span>
+          <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-orange-100 to-red-100 text-orange-800 px-6 py-3 rounded-full text-sm font-bold mb-6 shadow-md border border-orange-200">
+            <Calendar className="h-5 w-5" />
+            <span className="uppercase tracking-wider">Historic Timeline</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-5xl md:text-6xl font-black text-gray-900 mb-6">
             Journey Through History
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Key moments that shaped Haiti's revolutionary legacy
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            Key moments that shaped Haiti's revolutionary legacy and the birth of the first Black republic
           </p>
         </motion.div>
 
