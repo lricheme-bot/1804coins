@@ -80,30 +80,40 @@ const FeaturedProducts = () => {
                 className="group"
               >
                 <Link to={`/product/${product.id}`} className="block">
-                  <div className="bg-white overflow-hidden transition-all duration-300">
+                  <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 border border-gray-200 group-hover:border-orange-300 transform group-hover:-translate-y-2">
                     {/* Image Container */}
-                    <div className="relative aspect-square overflow-hidden bg-gray-100">
+                    <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
                       <img
                         src={product.image}
                         alt={product.name}
-                        className="w-full h-full object-cover group-hover:opacity-90 transition-opacity duration-300"
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                       />
                       
                       {/* Status Badge */}
-                      <Badge className={`absolute top-4 right-4 ${statusInfo.className}`}>
+                      <Badge className={`absolute top-4 right-4 shadow-lg ${statusInfo.className} font-bold uppercase text-xs tracking-wide`}>
                         {statusInfo.text}
                       </Badge>
+                      
+                      {/* Hover Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end justify-center pb-6">
+                        <span className="text-white font-semibold text-sm bg-orange-600 px-6 py-2 rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                          View Details →
+                        </span>
+                      </div>
                     </div>
 
                     {/* Product Info */}
-                    <div className="p-4 text-center">
-                      <h3 className="text-lg font-semibold text-gray-900 mb-1 underline decoration-1">
+                    <div className="p-6 text-center bg-gradient-to-b from-white to-gray-50">
+                      <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors duration-300">
                         {product.name}
                       </h3>
-                      <p className="text-sm text-gray-600 mb-2">{product.subtitle}</p>
-                      <p className="text-base text-gray-900">
-                        ${product.price.toFixed(2)}
-                      </p>
+                      <p className="text-sm text-gray-600 mb-3 line-clamp-1">{product.subtitle}</p>
+                      <div className="flex items-center justify-center space-x-2">
+                        <span className="text-2xl font-bold text-gray-900">
+                          ${product.price.toFixed(2)}
+                        </span>
+                        <span className="text-sm text-gray-500">USD</span>
+                      </div>
                     </div>
                   </div>
                 </Link>
