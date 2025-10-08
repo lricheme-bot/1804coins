@@ -1,0 +1,187 @@
+<!-- 
+  1804 COINS - SQUARESPACE EMBED CODE
+  
+  INSTRUCTIONS:
+  1. Deploy your app to Vercel first (see DEPLOYMENT_GUIDE.md)
+  2. Replace YOUR_VERCEL_URL with your actual Vercel deployment URL
+  3. Copy this entire code
+  4. In Squarespace: Add a Code Block and paste this code
+-->
+
+<!-- OPTION 1: FULL PAGE EMBED (Recommended) -->
+<!-- Use this for a dedicated shop page in Squarespace -->
+
+<style>
+  /* Full-screen iframe styles */
+  #coins-store-embed {
+    width: 100%;
+    min-height: 100vh;
+    height: 100vh;
+    border: none;
+    display: block;
+  }
+  
+  /* Remove Squarespace page padding */
+  .sqs-block-code {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  .page-section {
+    padding: 0 !important;
+  }
+  
+  .content-wrapper {
+    padding: 0 !important;
+  }
+  
+  /* Optional: Hide Squarespace header on this page */
+  .header {
+    display: none !important;
+  }
+  
+  /* Loading spinner */
+  .loading-spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #FF6600;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    z-index: 1000;
+  }
+  
+  @keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+  
+  .loading-spinner.hidden {
+    display: none;
+  }
+</style>
+
+<!-- Loading indicator -->
+<div class="loading-spinner" id="loading"></div>
+
+<!-- The embedded store -->
+<iframe 
+  id="coins-store-embed"
+  src="YOUR_VERCEL_URL"
+  frameborder="0"
+  scrolling="yes"
+  allowfullscreen
+  allow="payment"
+  title="1804 Coins Store"
+  onload="document.getElementById('loading').classList.add('hidden')"
+></iframe>
+
+<script>
+  // Dynamic height adjustment
+  window.addEventListener('message', function(e) {
+    const iframe = document.getElementById('coins-store-embed');
+    if (e.data && e.data.height) {
+      iframe.style.height = e.data.height + 'px';
+    }
+  });
+  
+  // Handle mobile viewport
+  if (window.innerWidth < 768) {
+    const iframe = document.getElementById('coins-store-embed');
+    iframe.style.height = '100vh';
+  }
+</script>
+
+
+<!-- ============================================= -->
+<!-- OPTION 2: SECTION EMBED -->
+<!-- Use this to embed shop in existing Squarespace page -->
+<!-- ============================================= -->
+
+<!--
+<style>
+  #coins-store-section {
+    width: 100%;
+    min-height: 1000px;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+  
+  @media (max-width: 768px) {
+    #coins-store-section {
+      min-height: 800px;
+    }
+  }
+</style>
+
+<div style="padding: 20px 0;">
+  <h2 style="text-align: center; margin-bottom: 20px;">Shop Our Collection</h2>
+  <iframe 
+    id="coins-store-section"
+    src="YOUR_VERCEL_URL/shop"
+    frameborder="0"
+    scrolling="yes"
+    title="Shop"
+  ></iframe>
+</div>
+-->
+
+
+<!-- ============================================= -->
+<!-- OPTION 3: PRODUCT SHOWCASE ONLY -->
+<!-- Embed just the featured products section -->
+<!-- ============================================= -->
+
+<!--
+<style>
+  #coins-products-widget {
+    width: 100%;
+    height: 800px;
+    border: none;
+  }
+</style>
+
+<iframe 
+  id="coins-products-widget"
+  src="YOUR_VERCEL_URL/#featured"
+  frameborder="0"
+  scrolling="no"
+  title="Featured Products"
+></iframe>
+-->
+
+
+<!-- ============================================= -->
+<!-- TROUBLESHOOTING -->
+<!-- ============================================= -->
+
+<!--
+  COMMON ISSUES:
+  
+  1. Blank iframe?
+     - Check if YOUR_VERCEL_URL is correct
+     - Open YOUR_VERCEL_URL in new tab to verify it works
+     - Check browser console for CORS errors
+  
+  2. Height issues?
+     - Adjust min-height in CSS
+     - Use height: 100vh for full page
+  
+  3. Not responsive on mobile?
+     - The iframe should be responsive by default
+     - Check that your React app is mobile-friendly
+  
+  4. Cart not working?
+     - Verify REACT_APP_BACKEND_URL is set in Vercel
+     - Check that backend is running on Railway
+  
+  5. Cookies blocked?
+     - Some browsers block third-party cookies in iframes
+     - Use same domain (subdomain) if possible
+-->
