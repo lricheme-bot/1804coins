@@ -145,28 +145,37 @@ const Header = () => {
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden text-gray-700"
+              className="md:hidden text-gray-900 hover:bg-gray-100"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
-              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isMobileMenuOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
             </Button>
           </div>
         </div>
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-200">
-            <nav className="flex flex-col space-y-4">
+          <div className="md:hidden absolute top-full left-0 right-0 bg-white/98 backdrop-blur-sm shadow-xl border-b-2 border-gray-200 py-6 animate-in slide-in-from-top duration-300">
+            <nav className="flex flex-col space-y-4 px-4">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   to={link.path}
-                  className="text-gray-700 hover:text-amber-600 font-medium transition-colors px-2"
+                  className="text-gray-900 hover:text-orange-600 font-semibold text-lg transition-colors py-2 px-4 rounded-lg hover:bg-orange-50 border-l-4 border-transparent hover:border-orange-600"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.name}
                 </Link>
               ))}
+              <div className="border-t border-gray-200 pt-4 mt-2">
+                <Link
+                  to="/login"
+                  className="block text-gray-900 hover:text-orange-600 font-semibold text-lg transition-colors py-2 px-4 rounded-lg hover:bg-orange-50"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Login
+                </Link>
+              </div>
             </nav>
           </div>
         )}
