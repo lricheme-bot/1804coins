@@ -4,16 +4,22 @@ import { Facebook, Instagram } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-white py-12">
+    <footer className="bg-gradient-to-b from-gray-900 to-black text-white py-16 border-t-4 border-orange-600">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
           {/* Brand */}
           <div>
-            <div className="text-2xl font-bold mb-4">
-              1804<span className="text-amber-500">Coins</span>
+            <div className="flex items-center space-x-3 mb-4">
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-amber-600 to-orange-700 flex items-center justify-center shadow-lg">
+                <span className="text-white font-bold text-sm">1804</span>
+              </div>
+              <div>
+                <div className="text-xl font-bold text-white">1804 COINS</div>
+                <div className="text-xs text-gray-400">Haiti's Legacy</div>
+              </div>
             </div>
-            <p className="text-gray-400">
-              Preserving Haiti's revolutionary legacy through premium collectible coins.
+            <p className="text-gray-400 leading-relaxed">
+              Preserving Haiti's revolutionary legacy through premium collectible coins. Honor the revolution, hold the legacy.
             </p>
           </div>
 
