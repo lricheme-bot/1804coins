@@ -33,18 +33,25 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3 group">
-            <img 
-              src="https://images.squarespace-cdn.com/content/v1/67d6ef5142cdf803b50d47be/4b6ae5c6-8c9d-4f6d-b9f1-3d8e5c4e8f7a/1804+Coins+Logo.png?format=300w"
-              alt="1804 Coins"
-              className="h-16 w-16 object-contain"
-              onError={(e) => {
-                e.target.style.display = 'none';
-                e.target.nextSibling.style.display = 'block';
-              }}
-            />
-            <div className="text-3xl font-semibold text-gray-900" style={{ display: 'block' }}>
-              1804Coins
+          <Link to="/" className="flex items-center space-x-3 group hover:opacity-80 transition-opacity">
+            {/* Custom Badge Logo */}
+            <div className="relative flex items-center justify-center">
+              {/* Outer circle with decorative border */}
+              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-amber-600 via-yellow-600 to-amber-700 flex items-center justify-center shadow-lg">
+                {/* Inner circle */}
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-yellow-100 to-amber-200 flex items-center justify-center border-2 border-amber-800">
+                  {/* Year */}
+                  <div className="text-center">
+                    <div className="text-lg font-bold text-amber-900 leading-none">1804</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Brand Text */}
+            <div className="flex flex-col leading-tight">
+              <span className="text-2xl font-bold text-gray-900 tracking-tight">1804 COINS</span>
+              <span className="text-xs text-gray-600 uppercase tracking-widest">Haiti's Legacy</span>
             </div>
           </Link>
 
