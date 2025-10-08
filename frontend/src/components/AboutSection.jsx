@@ -60,8 +60,11 @@ const AboutSection = () => {
             viewport={{ once: true }}
             className="space-y-6"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
-              About Our Company
+            <div className="inline-block mb-2">
+              <span className="text-sm font-bold text-orange-600 uppercase tracking-wider bg-orange-100 px-4 py-2 rounded-full">About Us</span>
+            </div>
+            <h2 className="text-5xl md:text-6xl font-black text-gray-900 leading-tight">
+              About Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-red-600">Company</span>
             </h2>
             
             <div className="space-y-4 text-gray-600 text-lg leading-relaxed">
