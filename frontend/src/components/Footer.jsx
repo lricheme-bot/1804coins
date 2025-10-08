@@ -25,25 +25,29 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
+            <h3 className="text-lg font-bold mb-4 text-orange-500">Quick Links</h3>
+            <ul className="space-y-3">
               <li>
-                <Link to="/" className="text-gray-400 hover:text-amber-500 transition-colors">
+                <Link to="/" className="text-gray-300 hover:text-orange-400 transition-colors flex items-center group">
+                  <span className="mr-2 text-orange-600 group-hover:translate-x-1 transition-transform">→</span>
                   Home
                 </Link>
               </li>
               <li>
-                <Link to="/shop" className="text-gray-400 hover:text-amber-500 transition-colors">
+                <Link to="/shop" className="text-gray-300 hover:text-orange-400 transition-colors flex items-center group">
+                  <span className="mr-2 text-orange-600 group-hover:translate-x-1 transition-transform">→</span>
                   Shop
                 </Link>
               </li>
               <li>
-                <a href="#about" className="text-gray-400 hover:text-amber-500 transition-colors">
+                <a href="#about" className="text-gray-300 hover:text-orange-400 transition-colors flex items-center group">
+                  <span className="mr-2 text-orange-600 group-hover:translate-x-1 transition-transform">→</span>
                   About
                 </a>
               </li>
               <li>
-                <a href="#contact" className="text-gray-400 hover:text-amber-500 transition-colors">
+                <a href="#contact" className="text-gray-300 hover:text-orange-400 transition-colors flex items-center group">
+                  <span className="mr-2 text-orange-600 group-hover:translate-x-1 transition-transform">→</span>
                   Contact
                 </a>
               </li>
