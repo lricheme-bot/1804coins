@@ -34,9 +34,9 @@ const Timeline = () => {
 
         <div className="relative">
           {/* Timeline Line */}
-          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-amber-300 via-amber-500 to-orange-500"></div>
+          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-orange-400 via-red-500 to-blue-600 shadow-lg"></div>
 
-          <div className="space-y-12">
+          <div className="space-y-16">
             {timelineEvents.map((event, index) => (
               <motion.div
                 key={index}
@@ -50,20 +50,28 @@ const Timeline = () => {
               >
                 {/* Content */}
                 <div className="flex-1 md:text-right" style={{ textAlign: index % 2 === 0 ? 'right' : 'left' }}>
-                  <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border-2 border-amber-100">
-                    <h3 className="text-2xl font-bold text-amber-600 mb-2">
-                      {event.year}
-                    </h3>
-                    <h4 className="text-xl font-semibold text-gray-900 mb-2">
-                      {event.title}
-                    </h4>
-                    <p className="text-gray-600">{event.description}</p>
+                  <div className="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border-2 border-orange-200 hover:border-orange-400 relative overflow-hidden group">
+                    {/* Decorative corner */}
+                    <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-orange-100 to-transparent opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                    
+                    <div className="relative z-10">
+                      <div className="inline-block mb-3">
+                        <h3 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-red-600">
+                          {event.year}
+                        </h3>
+                      </div>
+                      <h4 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-orange-600 transition-colors">
+                        {event.title}
+                      </h4>
+                      <p className="text-gray-600 leading-relaxed text-base">{event.description}</p>
+                    </div>
                   </div>
                 </div>
 
                 {/* Timeline Dot */}
                 <div className="relative flex items-center justify-center">
-                  <div className="w-16 h-16 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg z-10">
+                  <div className="absolute w-20 h-20 bg-orange-400 rounded-full opacity-20 blur-xl animate-pulse"></div>
+                  <div className="relative w-20 h-20 bg-gradient-to-br from-orange-500 via-red-500 to-orange-600 rounded-full flex items-center justify-center text-white font-black text-2xl shadow-2xl z-10 border-4 border-white group-hover:scale-110 transition-transform duration-300">
                     {index + 1}
                   </div>
                 </div>
