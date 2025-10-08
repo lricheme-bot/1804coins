@@ -33,25 +33,33 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3 group hover:opacity-80 transition-opacity">
-            {/* Custom Badge Logo */}
+          <Link to="/" className="flex items-center space-x-4 group hover:opacity-90 transition-opacity">
+            {/* Premium Coin Badge Logo */}
             <div className="relative flex items-center justify-center">
-              {/* Outer circle with decorative border */}
-              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-amber-600 via-yellow-600 to-amber-700 flex items-center justify-center shadow-lg">
-                {/* Inner circle */}
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-yellow-100 to-amber-200 flex items-center justify-center border-2 border-amber-800">
-                  {/* Year */}
-                  <div className="text-center">
-                    <div className="text-lg font-bold text-amber-900 leading-none">1804</div>
+              {/* Outer decorative ring */}
+              <div className="absolute w-16 h-16 rounded-full bg-gradient-to-br from-amber-500 via-yellow-500 to-amber-600 opacity-20 blur-sm"></div>
+              
+              {/* Main coin badge */}
+              <div className="relative w-16 h-16 rounded-full bg-gradient-to-br from-amber-700 via-yellow-600 to-amber-800 flex items-center justify-center shadow-xl border-2 border-amber-900" style={{boxShadow: '0 4px 20px rgba(180, 83, 9, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.3)'}}>
+                {/* Inner circle with embossed effect */}
+                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-yellow-50 via-amber-100 to-yellow-200 flex items-center justify-center border-2 border-amber-800 relative" style={{boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.2)'}}>
+                  {/* Year with better typography */}
+                  <div className="text-center relative z-10">
+                    <div className="text-xl font-extrabold text-amber-900 tracking-tight leading-none" style={{textShadow: '0 1px 2px rgba(255, 255, 255, 0.8)'}}>
+                      1804
+                    </div>
                   </div>
+                  {/* Subtle decorative stars */}
+                  <div className="absolute top-1 text-amber-700 text-xs">★</div>
+                  <div className="absolute bottom-1 text-amber-700 text-xs">★</div>
                 </div>
               </div>
             </div>
             
-            {/* Brand Text */}
-            <div className="flex flex-col leading-tight">
-              <span className="text-2xl font-bold text-gray-900 tracking-tight">1804 COINS</span>
-              <span className="text-xs text-gray-600 uppercase tracking-widest">Haiti's Legacy</span>
+            {/* Refined Brand Text */}
+            <div className="flex flex-col leading-none">
+              <span className="text-2xl font-bold text-gray-900 tracking-tight mb-1">1804 COINS</span>
+              <span className="text-sm text-gray-600 font-medium tracking-wide">Haiti's Legacy</span>
             </div>
           </Link>
 
