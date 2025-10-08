@@ -81,13 +81,14 @@ const Footer = () => {
 
           {/* Social */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
-            <div className="flex space-x-4">
+            <h3 className="text-lg font-bold mb-4 text-orange-500">Follow Us</h3>
+            <div className="flex space-x-3">
               <a
                 href="https://www.instagram.com/1804coins/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-amber-600 transition-colors"
+                className="w-12 h-12 bg-gradient-to-br from-pink-600 to-purple-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform duration-300 shadow-lg"
+                title="Instagram"
               >
                 <Instagram className="h-5 w-5" />
               </a>
@@ -95,13 +96,14 @@ const Footer = () => {
                 href="https://www.facebook.com/1804coins"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-amber-600 transition-colors"
+                className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-full flex items-center justify-center hover:scale-110 transition-transform duration-300 shadow-lg"
+                title="Facebook"
               >
                 <Facebook className="h-5 w-5" />
               </a>
             </div>
-            <p className="text-gray-400 mt-4 text-sm">
-              Stay connected for new releases and special offers.
+            <p className="text-gray-400 mt-6 text-sm leading-relaxed">
+              Stay connected for new releases, special offers, and Haitian heritage stories.
             </p>
           </div>
         </div>
