@@ -37,13 +37,13 @@ const Header = () => {
             <img 
               src="https://images.squarespace-cdn.com/content/v1/67d6ef5142cdf803b50d47be/4b6ae5c6-8c9d-4f6d-b9f1-3d8e5c4e8f7a/1804+Coins+Logo.png?format=300w"
               alt="1804 Coins"
-              className="h-12 w-12 object-contain"
+              className="h-16 w-16 object-contain"
               onError={(e) => {
                 e.target.style.display = 'none';
                 e.target.nextSibling.style.display = 'block';
               }}
             />
-            <div className="text-xl font-semibold text-gray-900" style={{ display: 'block' }}>
+            <div className="text-3xl font-semibold text-gray-900" style={{ display: 'block' }}>
               1804Coins
             </div>
           </Link>
