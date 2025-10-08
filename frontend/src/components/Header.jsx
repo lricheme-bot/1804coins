@@ -33,33 +33,80 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-4 group hover:opacity-90 transition-opacity">
-            {/* Premium Coin Badge Logo */}
-            <div className="relative flex items-center justify-center">
-              {/* Outer decorative ring */}
-              <div className="absolute w-16 h-16 rounded-full bg-gradient-to-br from-amber-500 via-yellow-500 to-amber-600 opacity-20 blur-sm"></div>
+          <Link to="/" className="flex items-center space-x-4 group transition-all duration-300">
+            {/* Premium Commemorative Coin Logo */}
+            <div className="relative flex items-center justify-center transform group-hover:scale-105 transition-transform duration-300">
+              {/* Outer glow effect */}
+              <div className="absolute w-20 h-20 rounded-full bg-gradient-to-br from-amber-400 via-yellow-400 to-orange-500 opacity-30 blur-lg group-hover:opacity-40 transition-opacity"></div>
               
-              {/* Main coin badge */}
-              <div className="relative w-16 h-16 rounded-full bg-gradient-to-br from-amber-700 via-yellow-600 to-amber-800 flex items-center justify-center shadow-xl border-2 border-amber-900" style={{boxShadow: '0 4px 20px rgba(180, 83, 9, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.3)'}}>
-                {/* Inner circle with embossed effect */}
-                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-yellow-50 via-amber-100 to-yellow-200 flex items-center justify-center border-2 border-amber-800 relative" style={{boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.2)'}}>
-                  {/* Year with better typography */}
-                  <div className="text-center relative z-10">
-                    <div className="text-xl font-extrabold text-amber-900 tracking-tight leading-none" style={{textShadow: '0 1px 2px rgba(255, 255, 255, 0.8)'}}>
-                      1804
+              {/* Coin outer rim with Haitian flag accent */}
+              <div className="relative w-[72px] h-[72px] rounded-full bg-gradient-to-br from-amber-800 via-amber-600 to-amber-900 flex items-center justify-center shadow-2xl border-[3px] border-amber-950" 
+                   style={{
+                     boxShadow: '0 8px 32px rgba(120, 53, 15, 0.5), inset 0 2px 8px rgba(255, 215, 0, 0.4), inset 0 -2px 4px rgba(0, 0, 0, 0.3)'
+                   }}>
+                
+                {/* Decorative notches (coin edge detail) */}
+                <div className="absolute inset-0 rounded-full" style={{
+                  background: 'repeating-conic-gradient(from 0deg, transparent 0deg 5deg, rgba(255, 255, 255, 0.15) 5deg 6deg)'
+                }}></div>
+                
+                {/* Middle ring with Haitian colors */}
+                <div className="relative w-[62px] h-[62px] rounded-full flex items-center justify-center"
+                     style={{
+                       background: 'linear-gradient(135deg, #C41E3A 0%, #C41E3A 50%, #00209F 50%, #00209F 100%)',
+                       boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.3)'
+                     }}>
+                  
+                  {/* Inner golden face */}
+                  <div className="w-[54px] h-[54px] rounded-full bg-gradient-to-br from-yellow-100 via-amber-200 to-yellow-300 flex items-center justify-center border-2 border-amber-900 relative overflow-hidden"
+                       style={{
+                         boxShadow: 'inset 0 3px 6px rgba(0, 0, 0, 0.25), inset 0 -2px 4px rgba(255, 255, 255, 0.6), 0 1px 3px rgba(0, 0, 0, 0.2)'
+                       }}>
+                    
+                    {/* Radial lines (coin texture) */}
+                    <div className="absolute inset-0 opacity-20" style={{
+                      background: 'repeating-radial-gradient(circle at center, transparent 0px, transparent 2px, rgba(180, 83, 9, 0.3) 2px, transparent 3px)'
+                    }}></div>
+                    
+                    {/* Year text */}
+                    <div className="text-center relative z-10">
+                      <div className="text-[22px] font-black text-amber-950 tracking-tighter leading-none" 
+                           style={{
+                             textShadow: '0 2px 4px rgba(255, 255, 255, 0.9), 0 1px 2px rgba(0, 0, 0, 0.2)',
+                             fontFamily: 'Georgia, serif'
+                           }}>
+                        1804
+                      </div>
                     </div>
+                    
+                    {/* Top and bottom stars */}
+                    <div className="absolute top-[2px] text-amber-800 text-[10px] opacity-80">⭐</div>
+                    <div className="absolute bottom-[2px] text-amber-800 text-[10px] opacity-80">⭐</div>
+                    
+                    {/* Side decorative elements */}
+                    <div className="absolute left-[4px] top-1/2 -translate-y-1/2 text-amber-700 text-[8px]">◆</div>
+                    <div className="absolute right-[4px] top-1/2 -translate-y-1/2 text-amber-700 text-[8px]">◆</div>
                   </div>
-                  {/* Subtle decorative stars */}
-                  <div className="absolute top-1 text-amber-700 text-xs">★</div>
-                  <div className="absolute bottom-1 text-amber-700 text-xs">★</div>
                 </div>
               </div>
             </div>
             
-            {/* Refined Brand Text */}
+            {/* Premium Brand Typography */}
             <div className="flex flex-col leading-none">
-              <span className="text-2xl font-bold text-gray-900 tracking-tight mb-1">1804 COINS</span>
-              <span className="text-sm text-gray-600 font-medium tracking-wide">Haiti's Legacy</span>
+              <div className="flex items-baseline space-x-1 mb-1">
+                <span className="text-[28px] font-black text-gray-900 tracking-tight" style={{fontFamily: 'Georgia, serif'}}>
+                  1804
+                </span>
+                <span className="text-[28px] font-bold text-gray-800 tracking-tight">
+                  COINS
+                </span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className="text-xs text-gray-600 font-semibold tracking-[0.15em] uppercase">
+                  Haiti's Legacy
+                </span>
+                <span className="text-xs">🇭🇹</span>
+              </div>
             </div>
           </Link>
 
