@@ -109,17 +109,25 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm">
-            © 2025 1804Coins. All rights reserved.
-          </p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link to="/privacy" className="text-gray-400 hover:text-amber-500 text-sm transition-colors">
-              Privacy Policy
-            </Link>
-            <Link to="/terms" className="text-gray-400 hover:text-amber-500 text-sm transition-colors">
-              Terms of Service
-            </Link>
+        <div className="border-t-2 border-gray-800 pt-8 mt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <p className="text-gray-400 text-sm">
+              © 2025 <span className="text-orange-500 font-semibold">1804 Coins</span>. All rights reserved. 🇭🇹
+            </p>
+            <div className="flex items-center space-x-6">
+              <Link to="/privacy" className="text-gray-400 hover:text-orange-400 text-sm transition-colors">
+                Privacy Policy
+              </Link>
+              <span className="text-gray-700">|</span>
+              <Link to="/terms" className="text-gray-400 hover:text-orange-400 text-sm transition-colors">
+                Terms of Service
+              </Link>
+            </div>
+          </div>
+          <div className="text-center mt-6">
+            <p className="text-xs text-gray-500 italic">
+              "Honor the revolution. Hold the legacy."
+            </p>
           </div>
         </div>
       </div>
