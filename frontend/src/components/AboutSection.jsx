@@ -27,9 +27,9 @@ const AboutSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-white" id="about">
+    <section className="py-24 bg-gradient-to-b from-white to-gray-50" id="about">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="grid md:grid-cols-2 gap-16 items-center">
           {/* Left - Image */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
