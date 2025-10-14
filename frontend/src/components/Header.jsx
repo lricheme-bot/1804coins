@@ -113,14 +113,34 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                to={link.path}
-                className="text-gray-900 hover:text-orange-600 font-medium text-base transition-colors relative group"
-              >
-                {link.name}
-                <span className="absolute bottom-[-4px] left-0 w-0 h-0.5 bg-orange-600 group-hover:w-full transition-all duration-300"></span>
-              </Link>
+              link.path.startsWith('#') ? (
+                <a
+                  key={link.name}
+                  href={link.path}
+                  onClick={(e) => {
+                    if (window.location.pathname !== '/') {
+                      e.preventDefault();
+                      navigate('/');
+                      setTimeout(() => {
+                        document.querySelector(link.path)?.scrollIntoView({ behavior: 'smooth' });
+                      }, 100);
+                    }
+                  }}
+                  className="text-gray-900 hover:text-orange-600 font-medium text-base transition-colors relative group"
+                >
+                  {link.name}
+                  <span className="absolute bottom-[-4px] left-0 w-0 h-0.5 bg-orange-600 group-hover:w-full transition-all duration-300"></span>
+                </a>
+              ) : (
+                <Link
+                  key={link.name}
+                  to={link.path}
+                  className="text-gray-900 hover:text-orange-600 font-medium text-base transition-colors relative group"
+                >
+                  {link.name}
+                  <span className="absolute bottom-[-4px] left-0 w-0 h-0.5 bg-orange-600 group-hover:w-full transition-all duration-300"></span>
+                </Link>
+              )
             ))}
           </nav>
 
