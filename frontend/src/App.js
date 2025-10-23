@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import { CartProvider } from './context/CartContext';
 import { Toaster } from './components/ui/toaster';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
