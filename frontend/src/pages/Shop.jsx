@@ -1,12 +1,29 @@
-import React, { useState } from 'react';
-import { mockProducts } from '../mockData';
+import React, { useState, useEffect } from 'react';
+import { productsAPI } from '../services/api';
 import ProductCard from '../components/ProductCard';
 import { Button } from '../components/ui/button';
 import { Filter } from 'lucide-react';
 
 const Shop = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('all');
   const [sortBy, setSortBy] = useState('featured');
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const data = await productsAPI.getAll();
+        setProducts(data);
+      } catch (error) {
+        console.error('Failed to fetch products:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   const filteredProducts = mockProducts.filter(product => {
     if (filter === 'all') return true;
