@@ -24,7 +24,7 @@ const Shop = () => {
       <div className="max-w-7xl mx-auto">
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Shop All Coins</h1>
-          <p className="text-gray-600">Explore our complete collection of commemorative coins</p>
+          <p className="text-gray-600">Explore our complete collection of challenge coins honoring Haiti's independence heroes</p>
         </div>
 
         {/* Filters */}
