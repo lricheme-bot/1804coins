@@ -25,7 +25,7 @@ const Shop = () => {
     fetchProducts();
   }, []);
 
-  const filteredProducts = mockProducts.filter(product => {
+  const filteredProducts = products.filter(product => {
     if (filter === 'all') return true;
     return product.category === filter;
   });
