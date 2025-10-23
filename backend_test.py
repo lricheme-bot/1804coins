@@ -1192,20 +1192,42 @@ class BackendTester:
     def run_all_tests(self):
         """Run all backend API tests in sequence"""
         print(f"\n{Colors.BOLD}{'='*80}{Colors.ENDC}")
-        print(f"{Colors.BOLD}1804 COINS BACKEND API TEST SUITE{Colors.ENDC}")
+        print(f"{Colors.BOLD}1804 COINS COMPREHENSIVE BACKEND API TEST SUITE{Colors.ENDC}")
         print(f"{Colors.BOLD}Testing Backend URL: {BASE_URL}{Colors.ENDC}")
         print(f"{Colors.BOLD}Testing API URL: {API_URL}{Colors.ENDC}")
         print(f"{Colors.BOLD}{'='*80}{Colors.ENDC}")
         
-        # Test sequence as specified in the review request
+        # Comprehensive test sequence as specified in the review request
         tests = [
+            # Authentication Tests
             ("1. Auth - Register", self.test_auth_register),
             ("2. Auth - Login", self.test_auth_login),
-            ("3. Products - Get All", self.test_get_products),
-            ("4. Products - Get One", self.test_get_product_by_id),
-            ("5. Comments - Get (Empty)", self.test_get_comments_empty),
-            ("6. Comments - Create", self.test_create_comment),
-            ("7. Comments - Get (With Data)", self.test_get_comments_with_data),
+            ("3. Auth - Get Current User (/me)", self.test_auth_me),
+            ("4. Auth - Duplicate Registration (Should Fail)", self.test_duplicate_registration),
+            ("5. Auth - Wrong Password Login (Should Fail)", self.test_wrong_password_login),
+            
+            # Products Tests
+            ("6. Products - Get All", self.test_get_products),
+            ("7. Products - Get One (Dessalines)", self.test_get_product_by_id),
+            ("8. Products - Get Non-existent (Should 404)", self.test_nonexistent_product),
+            
+            # Comments Tests (requires auth)
+            ("9. Comments - Get (Sanite Belair coin)", self.test_get_comments_empty),
+            ("10. Comments - Create (Authenticated)", self.test_create_comment),
+            ("11. Comments - Get (After Creating)", self.test_get_comments_with_data),
+            ("12. Comments - Like/Unlike Toggle", self.test_comment_like_unlike),
+            
+            # Admin Tests
+            ("13. Admin - Register Admin User", self.test_admin_registration),
+            ("14. Admin - Login Admin User", self.test_admin_login),
+            ("15. Admin - Check Admin Status", self.test_admin_check_status),
+            ("16. Admin - Get All Products", self.test_admin_get_products),
+            ("17. Admin - Create New Product", self.test_admin_create_product),
+            ("18. Admin - Update Product", self.test_admin_update_product),
+            ("19. Admin - Delete Product", self.test_admin_delete_product),
+            
+            # Image Upload Test
+            ("20. Image Upload - Mock File Upload", self.test_image_upload),
         ]
         
         for test_name, test_func in tests:
