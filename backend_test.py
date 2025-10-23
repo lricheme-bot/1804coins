@@ -53,6 +53,10 @@ class BackendTester:
     def __init__(self):
         self.token = None
         self.user_data = None
+        self.admin_token = None
+        self.admin_user_data = None
+        self.comment_id = None
+        self.created_product_id = None
         self.test_results = {
             'passed': 0,
             'failed': 0,
