@@ -368,10 +368,10 @@ class BackendTester:
         }
         
         comment_data = {
-            "comment": "This coin represents such an important part of Haitian history! Jean Jacques Dessalines was truly a revolutionary leader."
+            "comment": "Amazing coin! Sanite Belair was such a brave revolutionary fighter."
         }
         
-        response = self.make_request('POST', '/products/1/comments', comment_data, headers)
+        response = self.make_request('POST', '/products/3/comments', comment_data, headers)
         
         if not response:
             self.test_results['failed'] += 1
