@@ -1,5 +1,6 @@
-from fastapi import FastAPI, APIRouter, HTTPException, Depends, status
+from fastapi import FastAPI, APIRouter, HTTPException, Depends, status, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from motor.motor_asyncio import AsyncIOMotorClient
 from datetime import datetime
 from typing import List
@@ -7,6 +8,8 @@ import os
 import logging
 from pathlib import Path
 from dotenv import load_dotenv
+import shutil
+import uuid
 
 from models import (
     UserCreate, UserLogin, UserResponse, 
