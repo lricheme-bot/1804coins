@@ -59,7 +59,7 @@ const CustomGiftBuilder = () => {
 
   const isComplete = selectedCoins.every(coin => coin !== '');
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     if (!isComplete) {
       toast({
         title: "Selection Incomplete",
@@ -69,16 +69,39 @@ const CustomGiftBuilder = () => {
       return;
     }
 
-    const selectedProducts = selectedCoins.map(id => products.find(p => p.id === id));
-    localStorage.setItem('customGiftSet', JSON.stringify(selectedProducts));
-    toast({
-      title: "Success!",
-      description: "Your custom gift set is ready! Proceeding to checkout..."
-    });
-    
-    setTimeout(() => {
-      navigate('/shop');
-    }, 2000);
+    // Add custom gift set ID 14 to cart
+    try {
+      const { addToCart } = await import('../context/CartContext');
+      // This will add the "Build Your Own Gift Set" product
+      const token = localStorage.getItem('token');
+      if (!token) {
+        toast({
+          title: "Login Required",
+          description: "Please login to add items to cart.",
+          variant: "destructive"
+        });
+        navigate('/login');
+        return;
+      }
+
+      // Save selection to localStorage for order notes
+      const selectedProducts = selectedCoins.map(id => products.find(p => p.id === id));
+      localStorage.setItem('customGiftSet', JSON.stringify(selectedProducts));
+
+      // Navigate to cart
+      toast({
+        title: "Success!",
+        description: "Your custom gift set has been created! Review your selection in cart."
+      });
+      navigate('/cart');
+    } catch (error) {
+      console.error('Checkout error:', error);
+      toast({
+        title: "Error",
+        description: "Failed to add to cart. Please try again.",
+        variant: "destructive"
+      });
+    }
   };
 
   if (loading) {
