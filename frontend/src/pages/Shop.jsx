@@ -32,6 +32,12 @@ const Shop = () => {
       const heroineNames = ['Catherine Flon', 'Sanite Belair', 'Marie-Jeanne Lamartinière'];
       return heroineNames.some(name => product.name.includes(name));
     }
+    if (filter === 'on_sale') {
+      return product.on_sale === true;
+    }
+    if (filter === 'children') {
+      return product.category === 'children_books';
+    }
     return product.category === filter;
   });
 
