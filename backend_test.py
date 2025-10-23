@@ -731,7 +731,7 @@ class BackendTester:
         # Register admin user
         admin_user = {
             "username": "admin_user",
-            "email": "testadmin@1804coins.com",
+            "email": "admin@1804coins.com",
             "password": "admin123"
         }
         
