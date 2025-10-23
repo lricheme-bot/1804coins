@@ -284,6 +284,7 @@ const AdminDashboard = () => {
       sale_price: product.sale_price?.toString() || '',
       sale_label: product.sale_label || ''
     });
+    setImagePreview(product.image);
     setEditingProduct(product);
   };
 
