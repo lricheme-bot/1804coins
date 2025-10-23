@@ -9,8 +9,8 @@ const FAQs = () => {
       answer: 'Challenge coins are specially crafted commemorative tokens that honor individuals, organizations, events, or achievements. Our challenge coins celebrate Haiti\'s revolutionary heroes and their contributions to independence.'
     },
     {
-      question: 'Are these coins legal tender?',
-      answer: 'No, these are commemorative collectible coins and are not intended as legal tender. They are designed for collectors and those who appreciate historical significance.'
+      question: 'Are these coins legal tender or valuable as currency?',
+      answer: 'No, these are challenge coins designed to honor Haitian independence heroes. They are collectible commemorative pieces, not currency or investment items. Their value lies in the historical significance and the legacy they represent.'
     },
     {
       question: 'What materials are the coins made from?',
