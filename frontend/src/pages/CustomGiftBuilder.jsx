@@ -163,9 +163,12 @@ const CustomGiftBuilder = () => {
                     Coin {index + 1}
                   </Label>
                   <Select
-                    key={`select-${index}-${selectedCoins[index]}`}
-                    value={selectedCoins[index] || undefined}
-                    onValueChange={(value) => handleCoinSelection(index, value)}
+                    key={`select-${index}`}
+                    value={selectedCoins[index] || ''}
+                    onValueChange={(value) => {
+                      console.log(`Selecting coin ${index}:`, value);
+                      handleCoinSelection(index, value);
+                    }}
                   >
                     <SelectTrigger id={`coin-${index}`} className="w-full h-14 text-lg">
                       <SelectValue placeholder="Choose a hero..." />
