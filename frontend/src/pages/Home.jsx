@@ -114,11 +114,16 @@ const Home = () => {
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
               Exclusive Gift Sets
             </h2>
-            <p className="text-lg text-gray-700 max-w-3xl mx-auto">
+            <p className="text-lg text-gray-700 max-w-3xl mx-auto mb-6">
               Perfect for collectors and history enthusiasts. Our curated gift sets celebrate Haiti's revolutionary 
               heroes in beautifully packaged collections. Each set comes with premium display cases and certificates 
               of authenticity.
             </p>
+            <Link to="/custom-gift">
+              <Button size="lg" className="bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700 px-8 py-6 text-lg">
+                🎁 Build Your Own Custom Gift Set - Choose Any 3 Coins!
+              </Button>
+            </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {products.filter(p => p.category === 'gift_set').slice(0, 3).map((product) => (
