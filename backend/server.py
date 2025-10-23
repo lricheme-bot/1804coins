@@ -286,6 +286,7 @@ async def seed_products():
 # Include the routers in the main app
 app.include_router(api_router)
 app.include_router(admin_router, prefix="/api")
+app.include_router(cart_router, prefix="/api")
 
 app.add_middleware(
     CORSMiddleware,
