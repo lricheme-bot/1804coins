@@ -11,7 +11,7 @@ const Footer = () => {
           <div>
             <h3 className="font-bold text-lg mb-4">About 1804 Coins</h3>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Preserving Haiti's revolutionary history through beautifully crafted commemorative coins.
+              Preserving Haiti's revolutionary history through beautifully crafted challenge coins honoring independence heroes.
             </p>
           </div>
 
