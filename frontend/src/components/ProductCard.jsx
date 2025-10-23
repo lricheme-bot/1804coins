@@ -34,7 +34,7 @@ const ProductCard = ({ product }) => {
           <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-gray-600 transition-colors">
             {product.name}
           </h3>
-          <p className="text-sm text-gray-600 mb-3">commemorative Coin</p>
+          <p className="text-sm text-gray-600 mb-3">Challenge Coin</p>
           {product.status === 'coming_soon' ? (
             <p className="text-sm text-gray-500">Coming soon</p>
           ) : (
