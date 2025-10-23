@@ -35,6 +35,13 @@ set_db(db)
 # Create the main app without a prefix
 app = FastAPI()
 
+# Create uploads directory if it doesn't exist
+UPLOAD_DIR = Path("/app/backend/uploads")
+UPLOAD_DIR.mkdir(exist_ok=True)
+
+# Mount static files for uploaded images
+app.mount("/uploads", StaticFiles(directory=str(UPLOAD_DIR)), name="uploads")
+
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
 
