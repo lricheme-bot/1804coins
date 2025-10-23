@@ -14,6 +14,7 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import FAQs from './pages/FAQs';
 import CustomGiftBuilder from './pages/CustomGiftBuilder';
+import AdminDashboard from './pages/AdminDashboard';
 
 function App() {
   return (
