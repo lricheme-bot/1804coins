@@ -42,6 +42,8 @@ class Product(BaseModel):
     weight: str
     diameter: str
     mintage: str
+    sale_price: Optional[float] = None
+    sale_label: Optional[str] = None
 
     class Config:
         populate_by_name = True
