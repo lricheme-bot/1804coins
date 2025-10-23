@@ -104,6 +104,30 @@ const Shop = () => {
                 >
                   Royal
                 </Button>
+                <Button
+                  variant={filter === 'accessories' ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => setFilter('accessories')}
+                  className={filter === 'accessories' ? 'bg-black text-white' : ''}
+                >
+                  Accessories
+                </Button>
+                <Button
+                  variant={filter === 'children' ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => setFilter('children')}
+                  className={filter === 'children' ? 'bg-black text-white' : ''}
+                >
+                  Children's Books
+                </Button>
+                <Button
+                  variant={filter === 'on_sale' ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => setFilter('on_sale')}
+                  className={filter === 'on_sale' ? 'bg-red-600 text-white hover:bg-red-700' : ''}
+                >
+                  On Sale
+                </Button>
               </div>
             </div>
 
