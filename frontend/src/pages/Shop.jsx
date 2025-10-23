@@ -60,6 +60,22 @@ const Shop = () => {
                   All
                 </Button>
                 <Button
+                  variant={filter === 'gift_set' ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => setFilter('gift_set')}
+                  className={filter === 'gift_set' ? 'bg-black text-white' : ''}
+                >
+                  Gift Sets
+                </Button>
+                <Button
+                  variant={filter === 'heroines' ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => setFilter('heroines')}
+                  className={filter === 'heroines' ? 'bg-black text-white' : ''}
+                >
+                  Heroines
+                </Button>
+                <Button
                   variant={filter === 'historical' ? 'default' : 'outline'}
                   size="sm"
                   onClick={() => setFilter('historical')}
