@@ -438,8 +438,11 @@ class BackendTester:
                 comments = response.json()
                 if isinstance(comments, list):
                     print_success(f"Retrieved comments list with {len(comments)} items")
-                    if len(comments) == 1:
-                        print_success("Comments list has 1 comment as expected")
+                    if len(comments) >= 1:
+                        print_success("Comments list has comments as expected")
+                        
+                        # Store comment ID for like testing
+                        self.comment_id = comments[0]['id']
                         
                         # Check the comment structure
                         comment = comments[0]
@@ -451,7 +454,7 @@ class BackendTester:
                             print_warning(f"Comment missing fields: {missing_fields}")
                         
                     else:
-                        print_warning(f"Expected 1 comment, got {len(comments)} comments")
+                        print_warning(f"Expected at least 1 comment, got {len(comments)} comments")
                     
                     self.test_results['passed'] += 1
                     return True
@@ -475,6 +478,715 @@ class BackendTester:
                 print_error(f"Error response: {response.text}")
                 self.test_results['errors'].append(f"Get comments (with data) failed: {response.text}")
             self.test_results['failed'] += 1
+            return False
+
+    def test_auth_me(self):
+        """Test /auth/me endpoint with token"""
+        print_test_header("Auth - Get Current User (/me)")
+        
+        if not self.token:
+            print_error("No authentication token available")
+            self.test_results['failed'] += 1
+            self.test_results['errors'].append("No authentication token for /me endpoint")
+            return False
+        
+        headers = {
+            'Authorization': f'Bearer {self.token}',
+            'Content-Type': 'application/json'
+        }
+        
+        response = self.make_request('GET', '/auth/me', headers=headers)
+        
+        if not response:
+            self.test_results['failed'] += 1
+            self.test_results['errors'].append("/auth/me request failed - no response")
+            return False
+            
+        if response.status_code == 200:
+            try:
+                user_data = response.json()
+                if isinstance(user_data, dict):
+                    print_success("Successfully retrieved current user data")
+                    
+                    # Check required fields
+                    required_fields = ['id', 'username', 'email']
+                    missing_fields = [field for field in required_fields if field not in user_data]
+                    if not missing_fields:
+                        print_success("User data has all required fields")
+                    else:
+                        print_warning(f"User data missing fields: {missing_fields}")
+                    
+                    if user_data.get('email') == 'marie.claire@haiti.com':
+                        print_success("Correct user email returned")
+                    else:
+                        print_warning(f"Expected 'marie.claire@haiti.com', got '{user_data.get('email')}'")
+                    
+                    self.test_results['passed'] += 1
+                    return True
+                else:
+                    print_error("User data response is not a dict")
+                    self.test_results['failed'] += 1
+                    self.test_results['errors'].append("User data response is not a dict")
+                    return False
+            except json.JSONDecodeError:
+                print_error("Invalid JSON response from /auth/me")
+                self.test_results['failed'] += 1
+                self.test_results['errors'].append("Invalid JSON response from /auth/me")
+                return False
+        else:
+            print_error(f"/auth/me failed with status {response.status_code}")
+            try:
+                error_data = response.json()
+                print_error(f"Error details: {error_data}")
+                self.test_results['errors'].append(f"/auth/me failed: {error_data}")
+            except:
+                print_error(f"Error response: {response.text}")
+                self.test_results['errors'].append(f"/auth/me failed: {response.text}")
+            self.test_results['failed'] += 1
+            return False
+
+    def test_duplicate_registration(self):
+        """Test duplicate registration (should fail)"""
+        print_test_header("Auth - Duplicate Registration (Should Fail)")
+        
+        # Try to register with same email
+        duplicate_user = {
+            "username": "marie_claire2",
+            "email": "marie.claire@haiti.com",  # Same email as before
+            "password": "Haiti1804!"
+        }
+        
+        response = self.make_request('POST', '/auth/register', duplicate_user)
+        
+        if not response:
+            self.test_results['failed'] += 1
+            self.test_results['errors'].append("Duplicate registration request failed - no response")
+            return False
+            
+        if response.status_code == 400:
+            print_success("Duplicate registration correctly rejected with 400 status")
+            try:
+                error_data = response.json()
+                if 'detail' in error_data:
+                    print_success(f"Error message: {error_data['detail']}")
+                self.test_results['passed'] += 1
+                return True
+            except json.JSONDecodeError:
+                print_warning("No JSON error details, but status code is correct")
+                self.test_results['passed'] += 1
+                return True
+        else:
+            print_error(f"Duplicate registration should fail with 400, got {response.status_code}")
+            self.test_results['failed'] += 1
+            self.test_results['errors'].append(f"Duplicate registration should fail with 400, got {response.status_code}")
+            return False
+
+    def test_wrong_password_login(self):
+        """Test login with wrong password (should fail)"""
+        print_test_header("Auth - Wrong Password Login (Should Fail)")
+        
+        wrong_login = {
+            "email": "marie.claire@haiti.com",
+            "password": "WrongPassword123!"
+        }
+        
+        response = self.make_request('POST', '/auth/login', wrong_login)
+        
+        if not response:
+            self.test_results['failed'] += 1
+            self.test_results['errors'].append("Wrong password login request failed - no response")
+            return False
+            
+        if response.status_code == 401:
+            print_success("Wrong password login correctly rejected with 401 status")
+            try:
+                error_data = response.json()
+                if 'detail' in error_data:
+                    print_success(f"Error message: {error_data['detail']}")
+                self.test_results['passed'] += 1
+                return True
+            except json.JSONDecodeError:
+                print_warning("No JSON error details, but status code is correct")
+                self.test_results['passed'] += 1
+                return True
+        else:
+            print_error(f"Wrong password login should fail with 401, got {response.status_code}")
+            self.test_results['failed'] += 1
+            self.test_results['errors'].append(f"Wrong password login should fail with 401, got {response.status_code}")
+            return False
+
+    def test_nonexistent_product(self):
+        """Test get non-existent product (should 404)"""
+        print_test_header("Products - Get Non-existent Product (Should 404)")
+        
+        response = self.make_request('GET', '/products/999')
+        
+        if not response:
+            self.test_results['failed'] += 1
+            self.test_results['errors'].append("Non-existent product request failed - no response")
+            return False
+            
+        if response.status_code == 404:
+            print_success("Non-existent product correctly returns 404 status")
+            try:
+                error_data = response.json()
+                if 'detail' in error_data:
+                    print_success(f"Error message: {error_data['detail']}")
+                self.test_results['passed'] += 1
+                return True
+            except json.JSONDecodeError:
+                print_warning("No JSON error details, but status code is correct")
+                self.test_results['passed'] += 1
+                return True
+        else:
+            print_error(f"Non-existent product should return 404, got {response.status_code}")
+            self.test_results['failed'] += 1
+            self.test_results['errors'].append(f"Non-existent product should return 404, got {response.status_code}")
+            return False
+
+    def test_comment_like_unlike(self):
+        """Test comment like/unlike functionality"""
+        print_test_header("Comments - Like/Unlike Toggle")
+        
+        if not self.token:
+            print_error("No authentication token available")
+            self.test_results['failed'] += 1
+            self.test_results['errors'].append("No authentication token for comment liking")
+            return False
+        
+        if not hasattr(self, 'comment_id') or not self.comment_id:
+            print_error("No comment ID available for liking")
+            self.test_results['failed'] += 1
+            self.test_results['errors'].append("No comment ID available for liking")
+            return False
+        
+        headers = {
+            'Authorization': f'Bearer {self.token}',
+            'Content-Type': 'application/json'
+        }
+        
+        # Test liking the comment
+        response = self.make_request('POST', f'/comments/{self.comment_id}/like', headers=headers)
+        
+        if not response:
+            self.test_results['failed'] += 1
+            self.test_results['errors'].append("Like comment request failed - no response")
+            return False
+            
+        if response.status_code == 200:
+            try:
+                like_data = response.json()
+                if 'likes' in like_data and like_data['likes'] >= 1:
+                    print_success(f"Comment liked successfully, likes: {like_data['likes']}")
+                    
+                    # Test unliking the comment
+                    response2 = self.make_request('POST', f'/comments/{self.comment_id}/like', headers=headers)
+                    
+                    if response2 and response2.status_code == 200:
+                        unlike_data = response2.json()
+                        if 'likes' in unlike_data and unlike_data['likes'] < like_data['likes']:
+                            print_success(f"Comment unliked successfully, likes: {unlike_data['likes']}")
+                            self.test_results['passed'] += 1
+                            return True
+                        else:
+                            print_error("Unlike didn't decrease like count")
+                            self.test_results['failed'] += 1
+                            self.test_results['errors'].append("Unlike didn't decrease like count")
+                            return False
+                    else:
+                        print_error("Unlike request failed")
+                        self.test_results['failed'] += 1
+                        self.test_results['errors'].append("Unlike request failed")
+                        return False
+                else:
+                    print_error("Like didn't increase like count")
+                    self.test_results['failed'] += 1
+                    self.test_results['errors'].append("Like didn't increase like count")
+                    return False
+            except json.JSONDecodeError:
+                print_error("Invalid JSON response from like comment")
+                self.test_results['failed'] += 1
+                self.test_results['errors'].append("Invalid JSON response from like comment")
+                return False
+        else:
+            print_error(f"Like comment failed with status {response.status_code}")
+            try:
+                error_data = response.json()
+                print_error(f"Error details: {error_data}")
+                self.test_results['errors'].append(f"Like comment failed: {error_data}")
+            except:
+                print_error(f"Error response: {response.text}")
+                self.test_results['errors'].append(f"Like comment failed: {response.text}")
+            self.test_results['failed'] += 1
+            return False
+
+    def test_admin_registration(self):
+        """Test admin user registration"""
+        print_test_header("Admin - Register Admin User")
+        
+        # Register admin user
+        admin_user = {
+            "username": "admin_user",
+            "email": "testadmin@1804coins.com",
+            "password": "admin123"
+        }
+        
+        response = self.make_request('POST', '/auth/register', admin_user)
+        
+        if not response:
+            self.test_results['failed'] += 1
+            self.test_results['errors'].append("Admin registration request failed - no response")
+            return False
+            
+        if response.status_code == 200:
+            try:
+                data = response.json()
+                if 'token' in data and 'user' in data:
+                    self.admin_token = data['token']
+                    self.admin_user_data = data['user']
+                    print_success("Admin registration successful")
+                    print_success(f"Admin Token received: {self.admin_token[:20]}...")
+                    print_success(f"Admin User ID: {self.admin_user_data['id']}")
+                    self.test_results['passed'] += 1
+                    return True
+                else:
+                    print_error("Admin registration response missing token or user")
+                    self.test_results['failed'] += 1
+                    self.test_results['errors'].append("Admin registration response missing token or user")
+                    return False
+            except json.JSONDecodeError:
+                print_error("Invalid JSON response from admin registration")
+                self.test_results['failed'] += 1
+                self.test_results['errors'].append("Invalid JSON response from admin registration")
+                return False
+        else:
+            print_error(f"Admin registration failed with status {response.status_code}")
+            try:
+                error_data = response.json()
+                print_error(f"Error details: {error_data}")
+                self.test_results['errors'].append(f"Admin registration failed: {error_data}")
+            except:
+                print_error(f"Error response: {response.text}")
+                self.test_results['errors'].append(f"Admin registration failed: {response.text}")
+            self.test_results['failed'] += 1
+            return False
+
+    def test_admin_login(self):
+        """Test admin user login"""
+        print_test_header("Admin - Login Admin User")
+        
+        admin_login = {
+            "email": "testadmin@1804coins.com",
+            "password": "admin123"
+        }
+        
+        response = self.make_request('POST', '/auth/login', admin_login)
+        
+        if not response:
+            self.test_results['failed'] += 1
+            self.test_results['errors'].append("Admin login request failed - no response")
+            return False
+            
+        if response.status_code == 200:
+            try:
+                data = response.json()
+                if 'token' in data and 'user' in data:
+                    self.admin_token = data['token']  # Update admin token
+                    self.admin_user_data = data['user']
+                    print_success("Admin login successful")
+                    print_success(f"Admin Token received: {self.admin_token[:20]}...")
+                    self.test_results['passed'] += 1
+                    return True
+                else:
+                    print_error("Admin login response missing token or user")
+                    self.test_results['failed'] += 1
+                    self.test_results['errors'].append("Admin login response missing token or user")
+                    return False
+            except json.JSONDecodeError:
+                print_error("Invalid JSON response from admin login")
+                self.test_results['failed'] += 1
+                self.test_results['errors'].append("Invalid JSON response from admin login")
+                return False
+        else:
+            print_error(f"Admin login failed with status {response.status_code}")
+            try:
+                error_data = response.json()
+                print_error(f"Error details: {error_data}")
+                self.test_results['errors'].append(f"Admin login failed: {error_data}")
+            except:
+                print_error(f"Error response: {response.text}")
+                self.test_results['errors'].append(f"Admin login failed: {response.text}")
+            self.test_results['failed'] += 1
+            return False
+
+    def test_admin_check_status(self):
+        """Test admin status check"""
+        print_test_header("Admin - Check Admin Status")
+        
+        if not hasattr(self, 'admin_token') or not self.admin_token:
+            print_error("No admin token available")
+            self.test_results['failed'] += 1
+            self.test_results['errors'].append("No admin token for status check")
+            return False
+        
+        headers = {
+            'Authorization': f'Bearer {self.admin_token}',
+            'Content-Type': 'application/json'
+        }
+        
+        response = self.make_request('GET', '/admin/check', headers=headers)
+        
+        if not response:
+            self.test_results['failed'] += 1
+            self.test_results['errors'].append("Admin check request failed - no response")
+            return False
+            
+        if response.status_code == 200:
+            try:
+                admin_data = response.json()
+                if admin_data.get('is_admin') == True:
+                    print_success("Admin status confirmed")
+                    print_success(f"Admin email: {admin_data.get('email')}")
+                    self.test_results['passed'] += 1
+                    return True
+                else:
+                    print_error("User is not recognized as admin")
+                    self.test_results['failed'] += 1
+                    self.test_results['errors'].append("User is not recognized as admin")
+                    return False
+            except json.JSONDecodeError:
+                print_error("Invalid JSON response from admin check")
+                self.test_results['failed'] += 1
+                self.test_results['errors'].append("Invalid JSON response from admin check")
+                return False
+        else:
+            print_error(f"Admin check failed with status {response.status_code}")
+            try:
+                error_data = response.json()
+                print_error(f"Error details: {error_data}")
+                self.test_results['errors'].append(f"Admin check failed: {error_data}")
+            except:
+                print_error(f"Error response: {response.text}")
+                self.test_results['errors'].append(f"Admin check failed: {response.text}")
+            self.test_results['failed'] += 1
+            return False
+
+    def test_admin_get_products(self):
+        """Test admin get all products"""
+        print_test_header("Admin - Get All Products")
+        
+        if not hasattr(self, 'admin_token') or not self.admin_token:
+            print_error("No admin token available")
+            self.test_results['failed'] += 1
+            self.test_results['errors'].append("No admin token for get products")
+            return False
+        
+        headers = {
+            'Authorization': f'Bearer {self.admin_token}',
+            'Content-Type': 'application/json'
+        }
+        
+        response = self.make_request('GET', '/admin/products', headers=headers)
+        
+        if not response:
+            self.test_results['failed'] += 1
+            self.test_results['errors'].append("Admin get products request failed - no response")
+            return False
+            
+        if response.status_code == 200:
+            try:
+                products = response.json()
+                if isinstance(products, list):
+                    print_success(f"Admin retrieved {len(products)} products")
+                    if len(products) >= 6:
+                        print_success("Expected number of products retrieved")
+                    else:
+                        print_warning(f"Expected at least 6 products, got {len(products)}")
+                    
+                    self.test_results['passed'] += 1
+                    return True
+                else:
+                    print_error("Admin products response is not a list")
+                    self.test_results['failed'] += 1
+                    self.test_results['errors'].append("Admin products response is not a list")
+                    return False
+            except json.JSONDecodeError:
+                print_error("Invalid JSON response from admin get products")
+                self.test_results['failed'] += 1
+                self.test_results['errors'].append("Invalid JSON response from admin get products")
+                return False
+        else:
+            print_error(f"Admin get products failed with status {response.status_code}")
+            try:
+                error_data = response.json()
+                print_error(f"Error details: {error_data}")
+                self.test_results['errors'].append(f"Admin get products failed: {error_data}")
+            except:
+                print_error(f"Error response: {response.text}")
+                self.test_results['errors'].append(f"Admin get products failed: {response.text}")
+            self.test_results['failed'] += 1
+            return False
+
+    def test_admin_create_product(self):
+        """Test admin create product"""
+        print_test_header("Admin - Create New Product")
+        
+        if not hasattr(self, 'admin_token') or not self.admin_token:
+            print_error("No admin token available")
+            self.test_results['failed'] += 1
+            self.test_results['errors'].append("No admin token for create product")
+            return False
+        
+        headers = {
+            'Authorization': f'Bearer {self.admin_token}',
+            'Content-Type': 'application/json'
+        }
+        
+        new_product = {
+            "name": "Test Revolutionary Hero",
+            "description": "A test commemorative coin for testing purposes",
+            "price": 30.00,
+            "image": "https://example.com/test-coin.png",
+            "status": "in_stock",
+            "category": "test",
+            "featured": False,
+            "year": "2025",
+            "material": "Test material",
+            "weight": "30g",
+            "diameter": "40mm",
+            "mintage": "Test Edition"
+        }
+        
+        response = self.make_request('POST', '/admin/products', new_product, headers)
+        
+        if not response:
+            self.test_results['failed'] += 1
+            self.test_results['errors'].append("Admin create product request failed - no response")
+            return False
+            
+        if response.status_code == 200:
+            try:
+                product = response.json()
+                if isinstance(product, dict) and product.get('name') == new_product['name']:
+                    self.created_product_id = product.get('id')
+                    print_success("Product created successfully")
+                    print_success(f"Created product ID: {self.created_product_id}")
+                    print_success(f"Product name: {product.get('name')}")
+                    self.test_results['passed'] += 1
+                    return True
+                else:
+                    print_error("Created product response invalid")
+                    self.test_results['failed'] += 1
+                    self.test_results['errors'].append("Created product response invalid")
+                    return False
+            except json.JSONDecodeError:
+                print_error("Invalid JSON response from admin create product")
+                self.test_results['failed'] += 1
+                self.test_results['errors'].append("Invalid JSON response from admin create product")
+                return False
+        else:
+            print_error(f"Admin create product failed with status {response.status_code}")
+            try:
+                error_data = response.json()
+                print_error(f"Error details: {error_data}")
+                self.test_results['errors'].append(f"Admin create product failed: {error_data}")
+            except:
+                print_error(f"Error response: {response.text}")
+                self.test_results['errors'].append(f"Admin create product failed: {response.text}")
+            self.test_results['failed'] += 1
+            return False
+
+    def test_admin_update_product(self):
+        """Test admin update product"""
+        print_test_header("Admin - Update Product")
+        
+        if not hasattr(self, 'admin_token') or not self.admin_token:
+            print_error("No admin token available")
+            self.test_results['failed'] += 1
+            self.test_results['errors'].append("No admin token for update product")
+            return False
+        
+        if not hasattr(self, 'created_product_id') or not self.created_product_id:
+            print_error("No created product ID available")
+            self.test_results['failed'] += 1
+            self.test_results['errors'].append("No created product ID for update")
+            return False
+        
+        headers = {
+            'Authorization': f'Bearer {self.admin_token}',
+            'Content-Type': 'application/json'
+        }
+        
+        update_data = {
+            "name": "Updated Test Revolutionary Hero",
+            "price": 35.00,
+            "description": "Updated test commemorative coin description"
+        }
+        
+        response = self.make_request('PUT', f'/admin/products/{self.created_product_id}', update_data, headers)
+        
+        if not response:
+            self.test_results['failed'] += 1
+            self.test_results['errors'].append("Admin update product request failed - no response")
+            return False
+            
+        if response.status_code == 200:
+            try:
+                product = response.json()
+                if isinstance(product, dict) and product.get('name') == update_data['name']:
+                    print_success("Product updated successfully")
+                    print_success(f"Updated product name: {product.get('name')}")
+                    print_success(f"Updated product price: {product.get('price')}")
+                    self.test_results['passed'] += 1
+                    return True
+                else:
+                    print_error("Updated product response invalid")
+                    self.test_results['failed'] += 1
+                    self.test_results['errors'].append("Updated product response invalid")
+                    return False
+            except json.JSONDecodeError:
+                print_error("Invalid JSON response from admin update product")
+                self.test_results['failed'] += 1
+                self.test_results['errors'].append("Invalid JSON response from admin update product")
+                return False
+        else:
+            print_error(f"Admin update product failed with status {response.status_code}")
+            try:
+                error_data = response.json()
+                print_error(f"Error details: {error_data}")
+                self.test_results['errors'].append(f"Admin update product failed: {error_data}")
+            except:
+                print_error(f"Error response: {response.text}")
+                self.test_results['errors'].append(f"Admin update product failed: {response.text}")
+            self.test_results['failed'] += 1
+            return False
+
+    def test_admin_delete_product(self):
+        """Test admin delete product"""
+        print_test_header("Admin - Delete Product")
+        
+        if not hasattr(self, 'admin_token') or not self.admin_token:
+            print_error("No admin token available")
+            self.test_results['failed'] += 1
+            self.test_results['errors'].append("No admin token for delete product")
+            return False
+        
+        if not hasattr(self, 'created_product_id') or not self.created_product_id:
+            print_error("No created product ID available")
+            self.test_results['failed'] += 1
+            self.test_results['errors'].append("No created product ID for delete")
+            return False
+        
+        headers = {
+            'Authorization': f'Bearer {self.admin_token}',
+            'Content-Type': 'application/json'
+        }
+        
+        response = self.make_request('DELETE', f'/admin/products/{self.created_product_id}', headers=headers)
+        
+        if not response:
+            self.test_results['failed'] += 1
+            self.test_results['errors'].append("Admin delete product request failed - no response")
+            return False
+            
+        if response.status_code == 200:
+            try:
+                result = response.json()
+                if result.get('message') and 'deleted' in result.get('message', '').lower():
+                    print_success("Product deleted successfully")
+                    print_success(f"Delete message: {result.get('message')}")
+                    self.test_results['passed'] += 1
+                    return True
+                else:
+                    print_error("Delete product response invalid")
+                    self.test_results['failed'] += 1
+                    self.test_results['errors'].append("Delete product response invalid")
+                    return False
+            except json.JSONDecodeError:
+                print_error("Invalid JSON response from admin delete product")
+                self.test_results['failed'] += 1
+                self.test_results['errors'].append("Invalid JSON response from admin delete product")
+                return False
+        else:
+            print_error(f"Admin delete product failed with status {response.status_code}")
+            try:
+                error_data = response.json()
+                print_error(f"Error details: {error_data}")
+                self.test_results['errors'].append(f"Admin delete product failed: {error_data}")
+            except:
+                print_error(f"Error response: {response.text}")
+                self.test_results['errors'].append(f"Admin delete product failed: {response.text}")
+            self.test_results['failed'] += 1
+            return False
+
+    def test_image_upload(self):
+        """Test image upload endpoint"""
+        print_test_header("Image Upload - Mock File Upload")
+        
+        # Create a mock image file for testing
+        import io
+        
+        # Create a simple test image content (1x1 pixel PNG)
+        test_image_content = b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01\x08\x02\x00\x00\x00\x90wS\xde\x00\x00\x00\tpHYs\x00\x00\x0b\x13\x00\x00\x0b\x13\x01\x00\x9a\x9c\x18\x00\x00\x00\x0cIDATx\x9cc```\x00\x00\x00\x04\x00\x01\xdd\xcc\xdb\x1d\x00\x00\x00\x00IEND\xaeB`\x82'
+        
+        try:
+            import requests
+            
+            files = {
+                'file': ('test.png', io.BytesIO(test_image_content), 'image/png')
+            }
+            
+            url = f"{API_URL}/upload-image"
+            print_info(f"Making POST request to: {url}")
+            print_info("Uploading test image file")
+            
+            response = requests.post(url, files=files, timeout=30)
+            
+            print_info(f"Response status: {response.status_code}")
+            
+            if response.headers.get('content-type', '').startswith('application/json'):
+                try:
+                    response_data = response.json()
+                    print_info(f"Response body: {json.dumps(response_data, indent=2)}")
+                except:
+                    print_info(f"Response body (text): {response.text}")
+            else:
+                print_info(f"Response body (text): {response.text}")
+            
+            if response.status_code == 200:
+                try:
+                    upload_data = response.json()
+                    if 'url' in upload_data:
+                        print_success("Image uploaded successfully")
+                        print_success(f"Image URL: {upload_data['url']}")
+                        self.test_results['passed'] += 1
+                        return True
+                    else:
+                        print_error("Upload response missing URL")
+                        self.test_results['failed'] += 1
+                        self.test_results['errors'].append("Upload response missing URL")
+                        return False
+                except json.JSONDecodeError:
+                    print_error("Invalid JSON response from image upload")
+                    self.test_results['failed'] += 1
+                    self.test_results['errors'].append("Invalid JSON response from image upload")
+                    return False
+            else:
+                print_error(f"Image upload failed with status {response.status_code}")
+                try:
+                    error_data = response.json()
+                    print_error(f"Error details: {error_data}")
+                    self.test_results['errors'].append(f"Image upload failed: {error_data}")
+                except:
+                    print_error(f"Error response: {response.text}")
+                    self.test_results['errors'].append(f"Image upload failed: {response.text}")
+                self.test_results['failed'] += 1
+                return False
+                
+        except Exception as e:
+            print_error(f"Image upload test failed with exception: {str(e)}")
+            self.test_results['failed'] += 1
+            self.test_results['errors'].append(f"Image upload test failed: {str(e)}")
             return False
 
     def run_all_tests(self):
