@@ -5,14 +5,15 @@ from bson import ObjectId
 
 from models import Product
 from auth import get_current_user
-from motor.motor_asyncio import AsyncIOMotorClient
-import os
-
-mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
 
 admin_router = APIRouter(prefix="/admin", tags=["admin"])
+
+# Database will be injected from server.py
+db = None
+
+def set_db(database):
+    global db
+    db = database
 
 # Admin users list (in production, use a proper admin table)
 ADMIN_EMAILS = ["admin@1804coins.com", "owner@1804coins.com"]
