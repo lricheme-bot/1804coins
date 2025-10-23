@@ -73,36 +73,33 @@ const CustomGiftBuilder = () => {
       return;
     }
 
-    // Add custom gift set ID 14 to cart
-    try {
-      const { addToCart } = await import('../context/CartContext');
-      // This will add the "Build Your Own Gift Set" product
-      const token = localStorage.getItem('token');
-      if (!token) {
-        toast({
-          title: "Login Required",
-          description: "Please login to add items to cart.",
-          variant: "destructive"
-        });
-        navigate('/login');
-        return;
-      }
-
-      // Save selection to localStorage for order notes
-      const selectedProducts = selectedCoins.map(id => products.find(p => p.id === id));
-      localStorage.setItem('customGiftSet', JSON.stringify(selectedProducts));
-
-      // Navigate to cart
+    if (!user) {
       toast({
-        title: "Success!",
-        description: "Your custom gift set has been created! Review your selection in cart."
+        title: "Login Required",
+        description: "Please login to create your custom gift set.",
+        variant: "destructive"
+      });
+      navigate('/login');
+      return;
+    }
+
+    // Save selection to localStorage for reference
+    const selectedProducts = selectedCoins.map(id => products.find(p => p.id === id));
+    localStorage.setItem('customGiftSet', JSON.stringify(selectedProducts));
+
+    // Add the custom gift set product (ID 14) to cart
+    const result = await addToCart('14', 1);
+    
+    if (result.success) {
+      toast({
+        title: "Added to Cart!",
+        description: "Your custom gift set with " + selectedProducts.map(p => p.name).join(', ') + " has been added to cart."
       });
       navigate('/cart');
-    } catch (error) {
-      console.error('Checkout error:', error);
+    } else {
       toast({
         title: "Error",
-        description: "Failed to add to cart. Please try again.",
+        description: result.error || "Failed to add to cart. Please try again.",
         variant: "destructive"
       });
     }
