@@ -996,7 +996,7 @@ class BackendTester:
             try:
                 product = response.json()
                 if isinstance(product, dict) and product.get('name') == new_product['name']:
-                    self.created_product_id = product.get('id')
+                    self.created_product_id = product.get('_id') or product.get('id')
                     print_success("Product created successfully")
                     print_success(f"Created product ID: {self.created_product_id}")
                     print_success(f"Product name: {product.get('name')}")
