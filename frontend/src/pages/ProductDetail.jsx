@@ -68,7 +68,7 @@ const ProductDetail = () => {
 
   const handleShare = (platform) => {
     const url = window.location.href;
-    const text = `Check out this amazing ${product.name} commemorative coin!`;
+    const text = `Check out this amazing ${product.name} challenge coin honoring Haitian independence!`;
 
     let shareUrl = '';
     switch (platform) {
