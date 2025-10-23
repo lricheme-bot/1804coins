@@ -81,7 +81,7 @@ const Navbar = () => {
               <Link to="/cart">
                 <Button variant="default" size="sm" className="bg-black text-white hover:bg-gray-800">
                   <ShoppingCart className="w-4 h-4 mr-2" />
-                  Cart ({cart.length})
+                  Cart ({cart.item_count || 0})
                 </Button>
               </Link>
             </div>
