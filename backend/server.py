@@ -32,6 +32,7 @@ db = client[os.environ['DB_NAME']]
 
 # Set database for admin routes
 set_db(db)
+set_cart_db(db)
 
 # Create the main app without a prefix
 app = FastAPI()
