@@ -47,7 +47,7 @@ const About = () => {
             <CardContent className="p-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Honoring Heroes</h2>
               <p className="text-gray-700 leading-relaxed text-lg">
-                Our collection features commemorative coins celebrating revolutionary leaders like Jean-Jacques 
+                Our collection features challenge coins celebrating revolutionary leaders like Jean-Jacques 
                 Dessalines, Henri Christophe, and Alexandre Pétion, as well as unsung heroes such as Catherine 
                 Flon, Sanite Belair, and Marie-Jeanne Lamartinière. Through these coins, we ensure their 
                 legacies live on in metal and memory.
