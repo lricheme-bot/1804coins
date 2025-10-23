@@ -280,7 +280,33 @@ const ProductDetail = () => {
             </Card>
 
             {product.status !== 'coming_soon' && (
-              <Button size="lg" className="w-full bg-black text-white hover:bg-gray-800">
+              <Button 
+                size="lg" 
+                className="w-full bg-black text-white hover:bg-gray-800"
+                onClick={async () => {
+                  if (!user) {
+                    toast({
+                      title: "Login Required",
+                      description: "Please login to add items to cart.",
+                      variant: "destructive"
+                    });
+                    return;
+                  }
+                  const result = await addToCart(product.id);
+                  if (result.success) {
+                    toast({
+                      title: "Added to Cart!",
+                      description: `${product.name} has been added to your cart.`
+                    });
+                  } else {
+                    toast({
+                      title: "Error",
+                      description: result.error || "Failed to add to cart.",
+                      variant: "destructive"
+                    });
+                  }
+                }}
+              >
                 <ShoppingCart className="w-5 h-5 mr-2" />
                 Add to Cart
               </Button>
