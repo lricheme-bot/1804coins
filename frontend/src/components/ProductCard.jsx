@@ -17,13 +17,30 @@ const ProductCard = ({ product }) => {
     }
   };
 
+  const hasDiscount = product.sale_price && product.sale_price < product.price;
+  const discountPercent = hasDiscount 
+    ? Math.round(((product.price - product.sale_price) / product.price) * 100)
+    : 0;
+
   return (
     <Link to={`/product/${product.id}`}>
       <Card className="group overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-300 cursor-pointer h-full">
         <div className="relative aspect-square overflow-hidden bg-gray-50">
-          <div className="absolute top-3 right-3 z-10">
+          <div className="absolute top-3 right-3 z-10 flex flex-col gap-2">
             {getStatusBadge(product.status)}
+            {hasDiscount && (
+              <Badge className="bg-red-500 text-white">
+                {discountPercent}% OFF
+              </Badge>
+            )}
           </div>
+          {product.sale_label && (
+            <div className="absolute top-3 left-3 z-10">
+              <Badge className="bg-purple-600 text-white">
+                {product.sale_label}
+              </Badge>
+            </div>
+          )}
           <img
             src={product.image}
             alt={product.name}
@@ -38,7 +55,16 @@ const ProductCard = ({ product }) => {
           {product.status === 'coming_soon' ? (
             <p className="text-sm text-gray-500">Coming soon</p>
           ) : (
-            <p className="text-xl font-bold text-gray-900">${product.price}</p>
+            <div>
+              {hasDiscount ? (
+                <div className="flex items-center justify-center gap-2">
+                  <p className="text-lg text-gray-500 line-through">${product.price.toFixed(2)}</p>
+                  <p className="text-xl font-bold text-red-600">${product.sale_price.toFixed(2)}</p>
+                </div>
+              ) : (
+                <p className="text-xl font-bold text-gray-900">${product.price.toFixed(2)}</p>
+              )}
+            </div>
           )}
         </CardContent>
       </Card>
