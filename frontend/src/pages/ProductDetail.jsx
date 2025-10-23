@@ -12,10 +12,30 @@ import { toast } from '../hooks/use-toast';
 const ProductDetail = () => {
   const { id } = useParams();
   const { user } = useAuth();
-  const product = mockProducts.find(p => p.id === id);
-  const [comments, setComments] = useState(mockComments[id] || []);
+  const [product, setProduct] = useState(null);
+  const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
   const [showShareMenu, setShowShareMenu] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [productData, commentsData] = await Promise.all([
+          productsAPI.getById(id),
+          commentsAPI.getByProduct(id)
+        ]);
+        setProduct(productData);
+        setComments(commentsData);
+      } catch (error) {
+        console.error('Failed to fetch data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [id]);
 
   if (!product) {
     return (
