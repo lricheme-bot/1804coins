@@ -325,7 +325,12 @@ const ProductDetail = () => {
                         <span className="font-semibold text-gray-900">{comment.username}</span>
                         <span className="text-sm text-gray-500 ml-2">{formatDate(comment.timestamp)}</span>
                       </div>
-                      <Button variant="ghost" size="sm" className="flex items-center space-x-1">
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="flex items-center space-x-1"
+                        onClick={() => handleLikeComment(comment.id)}
+                      >
                         <ThumbsUp className="w-4 h-4" />
                         <span>{comment.likes}</span>
                       </Button>
