@@ -36,10 +36,10 @@ function App() {
             <Route path="/custom-gift" element={<CustomGiftBuilder />} />
             <Route path="/admin" element={<AdminDashboard />} />
           </Routes>
-          <Footer />
-          <Toaster />
-        </BrowserRouter>
-      </div>
+            <Footer />
+            <Toaster />
+          </BrowserRouter>
+        </div>
       </CartProvider>
     </AuthProvider>
   );
