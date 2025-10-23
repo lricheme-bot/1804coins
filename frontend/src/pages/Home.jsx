@@ -121,7 +121,7 @@ const Home = () => {
             </p>
             <Link to="/custom-gift">
               <Button size="lg" className="bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700 px-8 py-6 text-lg">
-                🎁 Build Your Own Custom Gift Set - Choose Any 3 Coins!
+                🎁 Build Your Own Gift Set - Pick Any 3 Coins for $60 (Save $15!)
               </Button>
             </Link>
           </div>
