@@ -40,6 +40,7 @@ function App() {
           <Toaster />
         </BrowserRouter>
       </div>
+      </CartProvider>
     </AuthProvider>
   );
 }
