@@ -102,16 +102,24 @@ const Shop = () => {
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {sortedProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-
-        {sortedProducts.length === 0 && (
+        {loading ? (
           <div className="text-center py-12">
-            <p className="text-gray-500 text-lg">No products found in this category.</p>
+            <p className="text-gray-500 text-lg">Loading products...</p>
           </div>
+        ) : (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              {sortedProducts.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+
+            {sortedProducts.length === 0 && (
+              <div className="text-center py-12">
+                <p className="text-gray-500 text-lg">No products found in this category.</p>
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>
