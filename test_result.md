@@ -409,6 +409,115 @@ test_plan:
           agent: "testing"
           comment: "✅ Image upload endpoint working correctly. Successfully handles file uploads, validates image types, generates unique filenames, and returns accessible URLs."
 
+frontend:
+  - task: "User Registration Flow"
+    implemented: true
+    working: true
+    file: "frontend/src/pages/Register.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ Registration flow working correctly. Successfully registered user 'gifttest' with email 'gifttest@test.com' and password 'test123'. Proper form validation, successful API call, and redirect to home page after registration."
+
+  - task: "User Login Flow"
+    implemented: true
+    working: true
+    file: "frontend/src/pages/Login.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ Login flow working correctly. Successfully authenticated user 'gifttest@test.com' with password 'test123'. Proper JWT token handling and user state management."
+
+  - task: "Custom Gift Builder - UI and Navigation"
+    implemented: true
+    working: true
+    file: "frontend/src/pages/CustomGiftBuilder.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ Custom Gift Builder page loads correctly with proper UI elements: counter showing '0 of 3 coins selected', three dropdown selectors for coins, pricing display ($75 regular, $60 gift set price), and proper layout."
+
+  - task: "Custom Gift Builder - Coin Selection"
+    implemented: true
+    working: false
+    file: "frontend/src/pages/CustomGiftBuilder.jsx"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: false
+          agent: "testing"
+          comment: "❌ Coin selection functionality not working properly. Dropdowns open and options are visible (Jean Jacques Dessalines, Sanite Belair, Catherine Flon, etc.), but selections are not being registered. Counter remains at '0 of 3 coins selected' even after selecting coins from all three dropdowns. Complete button does not appear - only shows 'Select 3 more coins' button."
+
+  - task: "Product Detail - Add to Cart"
+    implemented: true
+    working: false
+    file: "frontend/src/pages/ProductDetail.jsx"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: false
+          agent: "testing"
+          comment: "❌ Add to Cart functionality failing. Product page loads correctly showing Jean Jacques Dessalines coin with proper details and $25 price. Add to Cart button is present and clickable, but API call fails with 422 error. Console shows 'Failed to add to cart: AxiosError' and 'Failed to load resource: the server responded with a status of 422'. Cart remains empty after clicking Add to Cart. Backend API works correctly when tested directly with curl, suggesting frontend authentication or request formatting issue."
+
+  - task: "Shopping Cart Page"
+    implemented: true
+    working: false
+    file: "frontend/src/pages/Cart.jsx"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: false
+          agent: "testing"
+          comment: "❌ Cart page shows 'Your Cart is Empty' even after attempting to add items. Cart functionality depends on successful add to cart operation which is currently failing. Cart page UI is properly implemented with empty state display."
+
+  - task: "Cart Quantity Controls"
+    implemented: true
+    working: "NA"
+    file: "frontend/src/pages/Cart.jsx"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "testing"
+          comment: "Cannot test quantity controls (plus/minus buttons) because cart is empty due to add to cart functionality failing. UI elements appear to be implemented correctly."
+
+  - task: "Checkout Process"
+    implemented: true
+    working: "NA"
+    file: "frontend/src/pages/Cart.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "testing"
+          comment: "Cannot test checkout process because cart is empty due to add to cart functionality failing. Checkout button and flow appear to be implemented correctly."
+
+  - task: "Orders Page"
+    implemented: true
+    working: "NA"
+    file: "frontend/src/pages/Orders.jsx"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "testing"
+          comment: "Cannot test orders page because no orders can be created due to checkout process being blocked by add to cart issues. Orders page UI appears to be implemented correctly."
+
 agent_communication:
     - agent: "testing"
       message: "Backend API testing completed successfully. All 7 endpoints tested in sequence as requested: 1) Auth Register ✅ 2) Auth Login ✅ 3) Products Get All ✅ 4) Products Get One ✅ 5) Comments Get Empty ✅ 6) Comments Create ✅ 7) Comments Get With Data ✅. Authentication flow working properly with JWT tokens. Product data properly seeded with 6 Haitian historical figures. Comment system fully functional with proper user association. Backend is ready for production use."
@@ -416,3 +525,5 @@ agent_communication:
       message: "Comprehensive backend testing completed successfully. Tested 20 endpoints total: ✅ Authentication (5/5): register, login, /me, duplicate validation, wrong password validation ✅ Products (3/3): get all, get one, 404 handling ✅ Comments (4/4): get, create, like/unlike toggle ✅ Admin (7/7): registration, login, status check, get products, create/update/delete products ✅ Image Upload (1/1): file upload with validation. Fixed critical issues: /auth/me ObjectId conversion, admin product ID generation. All core functionality working correctly. Backend API is production-ready with 16/20 tests passing (4 minor test reporting issues, not functional issues)."
     - agent: "testing"
       message: "Shopping Cart Backend Testing Complete ✅ Successfully tested all 8 cart operations in exact sequence: 1) Register & Login ✅ 2) Add Items to Cart (products 1, 3, 14) ✅ 3) Get Cart (3 items, $135 total) ✅ 4) Update Quantity (product 1: 1→3) ✅ 5) Get Cart Again (verified update, $185 total) ✅ 6) Remove Item (product 3) ✅ 7) Checkout (order created, $135 total) ✅ 8) Get Orders (order retrieved with correct data) ✅. All cart functionality working perfectly with proper authentication, data persistence, and calculations. Cart backend is production-ready."
+    - agent: "testing"
+      message: "Frontend Testing Results: CRITICAL ISSUES FOUND ❌ 1) Custom Gift Builder coin selection not working - dropdowns don't register selections, counter stays at 0/3 2) Add to Cart failing with 422 errors - backend API works with curl but frontend requests fail 3) Cart remains empty, blocking all cart/checkout functionality. ✅ Working: Registration, Login, UI layouts, navigation. 🔍 Root Cause: Frontend authentication token handling or request formatting issue - backend API confirmed working. All cart functionality blocked by add to cart failure."
