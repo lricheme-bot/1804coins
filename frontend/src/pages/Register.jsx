@@ -15,7 +15,7 @@ const Register = () => {
   const { register } = useAuth();
   const navigate = useNavigate();
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
 
     // Validation
@@ -46,20 +46,21 @@ const Register = () => {
       return;
     }
 
-    // Mock successful registration
-    const userData = {
-      id: 'user' + Date.now(),
-      username: username,
-      email: email,
-      name: username
-    };
-
-    register(userData);
-    toast({
-      title: "Success",
-      description: "Account created successfully!"
-    });
-    navigate('/');
+    const result = await register(username, email, password);
+    
+    if (result.success) {
+      toast({
+        title: "Success",
+        description: "Account created successfully!"
+      });
+      navigate('/');
+    } else {
+      toast({
+        title: "Error",
+        description: result.error || "Registration failed. Please try again.",
+        variant: "destructive"
+      });
+    }
   };
 
   return (
