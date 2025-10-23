@@ -566,9 +566,15 @@ class BackendTester:
         print_test_header("Auth - Duplicate Registration (Should Fail)")
         
         # Try to register with same email
+        if not self.user_data:
+            print_error("No user data from registration")
+            self.test_results['failed'] += 1
+            self.test_results['errors'].append("No user data from registration")
+            return False
+            
         duplicate_user = {
             "username": "marie_claire2",
-            "email": "marie.claire@haiti.com",  # Same email as before
+            "email": self.user_data['email'],  # Same email as before
             "password": "Haiti1804!"
         }
         
