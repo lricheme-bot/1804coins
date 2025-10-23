@@ -77,21 +77,21 @@ const ProductDetail = () => {
       return;
     }
 
-    const comment = {
-      id: `c${Date.now()}`,
-      userId: user.id,
-      username: user.username,
-      comment: newComment,
-      timestamp: new Date().toISOString(),
-      likes: 0
-    };
-
-    setComments([comment, ...comments]);
-    setNewComment('');
-    toast({
-      title: "Success",
-      description: "Your comment has been posted."
-    });
+    try {
+      const createdComment = await commentsAPI.create(id, newComment);
+      setComments([createdComment, ...comments]);
+      setNewComment('');
+      toast({
+        title: "Success",
+        description: "Your comment has been posted."
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: error.response?.data?.detail || "Failed to post comment.",
+        variant: "destructive"
+      });
+    }
   };
 
   const handleShare = (platform) => {
