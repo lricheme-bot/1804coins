@@ -354,13 +354,54 @@ const AdminDashboard = () => {
       </div>
 
       <div>
-        <Label htmlFor="image">Image URL *</Label>
-        <Input
-          id="image"
-          value={formData.image}
-          onChange={(e) => handleInputChange('image', e.target.value)}
-          placeholder="https://..."
-        />
+        <Label htmlFor="image">Product Image *</Label>
+        <div className="space-y-3">
+          <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-gray-400 transition-colors">
+            <input
+              type="file"
+              id="imageUpload"
+              accept="image/*"
+              onChange={handleImageUpload}
+              className="hidden"
+            />
+            <label htmlFor="imageUpload" className="cursor-pointer">
+              {uploadingImage ? (
+                <div className="py-4">
+                  <p className="text-gray-600">Uploading...</p>
+                </div>
+              ) : (
+                <div className="py-4">
+                  <p className="text-gray-700 font-medium mb-1">Click to upload image</p>
+                  <p className="text-sm text-gray-500">PNG, JPG, WEBP up to 5MB</p>
+                </div>
+              )}
+            </label>
+          </div>
+          
+          {(imagePreview || formData.image) && (
+            <div className="relative">
+              <img
+                src={imagePreview || formData.image}
+                alt="Preview"
+                className="w-full h-48 object-cover rounded-lg border-2 border-gray-200"
+              />
+            </div>
+          )}
+          
+          <div className="text-xs text-gray-500">
+            <p className="font-medium mb-1">Or paste image URL:</p>
+            <Input
+              id="image"
+              value={formData.image}
+              onChange={(e) => {
+                handleInputChange('image', e.target.value);
+                setImagePreview(e.target.value);
+              }}
+              placeholder="https://..."
+              className="text-sm"
+            />
+          </div>
+        </div>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
