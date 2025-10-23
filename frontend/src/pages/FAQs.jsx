@@ -5,8 +5,8 @@ import { Card, CardContent } from '../components/ui/card';
 const FAQs = () => {
   const faqs = [
     {
-      question: 'What are commemorative coins?',
-      answer: 'Commemorative coins are specially minted coins that honor a person, place, event, or historical period. Our coins celebrate Haiti\'s revolutionary heroes and significant historical moments.'
+      question: 'What are challenge coins?',
+      answer: 'Challenge coins are specially crafted commemorative tokens that honor individuals, organizations, events, or achievements. Our challenge coins celebrate Haiti\'s revolutionary heroes and their contributions to independence.'
     },
     {
       question: 'Are these coins legal tender?',
