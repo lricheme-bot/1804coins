@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Test the 1804 Coins backend API endpoints for authentication, products, and comments functionality"
+user_problem_statement: "Test Shopping Cart Backend - Register & Login, Add Items to Cart, Get Cart, Update Quantity, Remove Item, Checkout, Get Orders"
 
 backend:
   - task: "Auth - Register endpoint"
