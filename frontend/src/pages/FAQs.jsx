@@ -25,8 +25,8 @@ const FAQs = () => {
       answer: 'Yes, we ship worldwide. Shipping costs and delivery times vary by location. International orders may be subject to customs fees determined by the destination country.'
     },
     {
-      question: 'How should I care for my commemorative coins?',
-      answer: 'Store coins in a cool, dry place away from direct sunlight. Handle them by the edges to avoid fingerprints. We recommend using coin capsules or protective cases to preserve their condition.'
+      question: 'How should I care for my challenge coins?',
+      answer: 'Store coins in a cool, dry place away from direct sunlight. Handle them by the edges to avoid fingerprints. We recommend using coin capsules or protective cases to preserve their condition and appearance.'
     },
     {
       question: 'Can I return a coin if I\'m not satisfied?',
