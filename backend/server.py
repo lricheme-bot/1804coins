@@ -234,6 +234,34 @@ async def like_comment(
     
     return {"likes": max(0, new_likes)}
 
+# ============== Image Upload ==============
+
+@api_router.post("/upload-image")
+async def upload_image(file: UploadFile = File(...)):
+    """Upload an image and return the URL"""
+    try:
+        # Validate file type
+        if not file.content_type.startswith('image/'):
+            raise HTTPException(status_code=400, detail="File must be an image")
+        
+        # Generate unique filename
+        file_extension = Path(file.filename).suffix
+        unique_filename = f"{uuid.uuid4()}{file_extension}"
+        file_path = UPLOAD_DIR / unique_filename
+        
+        # Save file
+        with open(file_path, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+        
+        # Return URL (relative to backend)
+        backend_url = os.environ.get('REACT_APP_BACKEND_URL', 'http://localhost:8001')
+        image_url = f"{backend_url}/uploads/{unique_filename}"
+        
+        return {"url": image_url}
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Upload failed: {str(e)}")
+
 # ============== Seed Database ==============
 
 @api_router.post("/seed-products")
