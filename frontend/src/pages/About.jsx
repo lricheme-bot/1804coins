@@ -13,7 +13,7 @@ const About = () => {
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Our Mission</h2>
               <p className="text-gray-700 leading-relaxed text-lg">
                 At 1804 Coins, we are dedicated to preserving and celebrating Haiti's rich revolutionary history 
-                through beautifully crafted commemorative coins. Each piece in our collection tells the story of 
+                through beautifully crafted challenge coins. Each piece in our collection tells the story of 
                 the brave men and women who fought for Haiti's independence and shaped the nation's destiny.
               </p>
             </CardContent>
