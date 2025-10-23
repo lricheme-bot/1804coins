@@ -397,8 +397,8 @@ class BackendTester:
                     else:
                         print_warning("Comment text doesn't match input")
                     
-                    if comment.get('product_id') == '1':
-                        print_success("Comment associated with correct product")
+                    if comment.get('product_id') == '3':
+                        print_success("Comment associated with correct product (Sanite Belair)")
                     else:
                         print_warning("Comment not associated with correct product")
                     
