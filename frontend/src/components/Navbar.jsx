@@ -56,6 +56,13 @@ const Navbar = () => {
             <div className="hidden md:flex items-center space-x-4">
               {user ? (
                 <>
+                  {['admin@1804coins.com', 'owner@1804coins.com'].includes(user.email) && (
+                    <Link to="/admin">
+                      <Button variant="ghost" size="sm" className="text-purple-600 hover:text-purple-700">
+                        Admin
+                      </Button>
+                    </Link>
+                  )}
                   <Button variant="ghost" size="sm" className="flex items-center space-x-2">
                     <User className="w-4 h-4" />
                     <span>{user.username}</span>
