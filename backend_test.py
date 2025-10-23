@@ -308,10 +308,10 @@ class BackendTester:
             return False
 
     def test_get_comments_empty(self):
-        """Test get comments endpoint (should be empty initially)"""
-        print_test_header("Comments - Get (Initially Empty)")
+        """Test get comments endpoint for Sanite Belair coin"""
+        print_test_header("Comments - Get (Sanite Belair coin)")
         
-        response = self.make_request('GET', '/products/1/comments')
+        response = self.make_request('GET', '/products/3/comments')
         
         if not response:
             self.test_results['failed'] += 1
