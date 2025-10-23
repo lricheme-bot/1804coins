@@ -159,8 +159,15 @@ class BackendTester:
         """Test user login endpoint"""
         print_test_header("Auth - Login")
         
+        # Use the same user data from registration
+        if not self.user_data:
+            print_error("No user data from registration")
+            self.test_results['failed'] += 1
+            self.test_results['errors'].append("No user data from registration")
+            return False
+        
         login_data = {
-            "email": "marie.claire@haiti.com",
+            "email": self.user_data['email'],
             "password": "Haiti1804!"
         }
         
