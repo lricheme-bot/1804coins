@@ -126,6 +126,26 @@ const ProductDetail = () => {
     setShowShareMenu(false);
   };
 
+  const handleLikeComment = async (commentId) => {
+    if (!user) {
+      toast({
+        title: "Login Required",
+        description: "Please login to like comments.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    try {
+      const result = await commentsAPI.like(commentId);
+      setComments(comments.map(c => 
+        c.id === commentId ? { ...c, likes: result.likes } : c
+      ));
+    } catch (error) {
+      console.error('Failed to like comment:', error);
+    }
+  };
+
   const formatDate = (timestamp) => {
     const date = new Date(timestamp);
     return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
