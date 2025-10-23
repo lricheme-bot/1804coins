@@ -430,7 +430,7 @@ class BackendTester:
         """Test get comments endpoint (should have 1 comment now)"""
         print_test_header("Comments - Get (After Creating Comment)")
         
-        response = self.make_request('GET', '/products/1/comments')
+        response = self.make_request('GET', '/products/3/comments')
         
         if not response:
             self.test_results['failed'] += 1
