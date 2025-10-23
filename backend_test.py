@@ -780,7 +780,7 @@ class BackendTester:
         print_test_header("Admin - Login Admin User")
         
         admin_login = {
-            "email": "testadmin@1804coins.com",
+            "email": "admin@1804coins.com",
             "password": "admin123"
         }
         
