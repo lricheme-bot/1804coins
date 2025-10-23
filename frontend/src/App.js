@@ -16,6 +16,8 @@ import Contact from './pages/Contact';
 import FAQs from './pages/FAQs';
 import CustomGiftBuilder from './pages/CustomGiftBuilder';
 import AdminDashboard from './pages/AdminDashboard';
+import Cart from './pages/Cart';
+import Orders from './pages/Orders';
 
 function App() {
   return (
