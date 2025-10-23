@@ -13,6 +13,7 @@ import Register from './pages/Register';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import FAQs from './pages/FAQs';
+import CustomGiftBuilder from './pages/CustomGiftBuilder';
 
 function App() {
   return (
