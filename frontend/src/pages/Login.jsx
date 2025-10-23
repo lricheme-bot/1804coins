@@ -13,10 +13,9 @@ const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
-    // Mock login validation
     if (!email || !password) {
       toast({
         title: "Error",
@@ -26,20 +25,21 @@ const Login = () => {
       return;
     }
 
-    // Mock successful login
-    const userData = {
-      id: 'user' + Date.now(),
-      username: email.split('@')[0],
-      email: email,
-      name: email.split('@')[0]
-    };
-
-    login(userData);
-    toast({
-      title: "Success",
-      description: "Welcome back!"
-    });
-    navigate('/');
+    const result = await login(email, password);
+    
+    if (result.success) {
+      toast({
+        title: "Success",
+        description: "Welcome back!"
+      });
+      navigate('/');
+    } else {
+      toast({
+        title: "Error",
+        description: result.error || "Login failed. Please try again.",
+        variant: "destructive"
+      });
+    }
   };
 
   return (
