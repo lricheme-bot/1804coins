@@ -21,7 +21,7 @@ const Home = () => {
                 From 1804 To Your Hands - The Legacy Lives On.
               </p>
               <p className="text-lg text-gray-600">
-                Discover our exclusive collection of commemorative coins celebrating Haiti's revolutionary heroes and historical figures.
+                Discover our exclusive collection of challenge coins honoring Haiti's revolutionary heroes and independence fighters.
               </p>
               <Link to="/shop">
                 <Button size="lg" className="bg-black text-white hover:bg-gray-800 px-8 py-6 text-lg">
