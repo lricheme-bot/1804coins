@@ -115,6 +115,65 @@ const AdminDashboard = () => {
       sale_label: ''
     });
     setEditingProduct(null);
+    setImagePreview('');
+  };
+
+  const handleImageUpload = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      toast({
+        title: "Error",
+        description: "Please select an image file.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    // Validate file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      toast({
+        title: "Error",
+        description: "Image size must be less than 5MB.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setUploadingImage(true);
+
+    try {
+      const token = localStorage.getItem('token');
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const response = await axios.post(`${API}/upload-image`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+
+      const imageUrl = response.data.url;
+      handleInputChange('image', imageUrl);
+      setImagePreview(imageUrl);
+
+      toast({
+        title: "Success",
+        description: "Image uploaded successfully!"
+      });
+    } catch (error) {
+      console.error('Upload failed:', error);
+      toast({
+        title: "Error",
+        description: error.response?.data?.detail || "Failed to upload image.",
+        variant: "destructive"
+      });
+    } finally {
+      setUploadingImage(false);
+    }
   };
 
   const handleAddProduct = async () => {
