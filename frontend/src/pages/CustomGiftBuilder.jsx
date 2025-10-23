@@ -134,20 +134,21 @@ const CustomGiftBuilder = () => {
 
             <div className="space-y-6">
               {[0, 1, 2].map((index) => (
-                <div key={index} className="space-y-3">
+                <div key={`coin-selector-${index}`} className="space-y-3">
                   <Label htmlFor={`coin-${index}`} className="text-lg font-semibold text-gray-700">
                     Coin {index + 1}
                   </Label>
                   <Select
-                    value={selectedCoins[index]}
+                    key={`select-${index}-${selectedCoins[index]}`}
+                    value={selectedCoins[index] || undefined}
                     onValueChange={(value) => handleCoinSelection(index, value)}
                   >
-                    <SelectTrigger className="w-full h-14 text-lg">
+                    <SelectTrigger id={`coin-${index}`} className="w-full h-14 text-lg">
                       <SelectValue placeholder="Choose a hero..." />
                     </SelectTrigger>
                     <SelectContent>
                       {getAvailableCoins(index).map((coin) => (
-                        <SelectItem key={coin.id} value={coin.id} className="text-lg py-3">
+                        <SelectItem key={`${index}-${coin.id}`} value={coin.id} className="text-lg py-3">
                           {coin.name} - {coin.year}
                         </SelectItem>
                       ))}
