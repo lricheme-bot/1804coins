@@ -32,6 +32,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/faqs" element={<FAQs />} />
             <Route path="/custom-gift" element={<CustomGiftBuilder />} />
+            <Route path="/admin" element={<AdminDashboard />} />
           </Routes>
           <Footer />
           <Toaster />
