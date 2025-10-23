@@ -16,7 +16,7 @@ from auth import (
     get_password_hash, verify_password, create_access_token, get_current_user
 )
 from seed_data import products_data
-from admin_routes import admin_router
+from admin_routes import admin_router, set_db
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -25,6 +25,9 @@ load_dotenv(ROOT_DIR / '.env')
 mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
+
+# Set database for admin routes
+set_db(db)
 
 # Create the main app without a prefix
 app = FastAPI()
