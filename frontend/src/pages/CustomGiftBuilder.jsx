@@ -15,6 +15,8 @@ const CustomGiftBuilder = () => {
   const [selectedCoins, setSelectedCoins] = useState(['', '', '']);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const { addToCart } = useCart();
+  const { user } = useAuth();
 
   const GIFT_SET_PRICE = 60.00;
   const REGULAR_PRICE = 75.00; // 3 coins at $25 each
