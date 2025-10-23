@@ -33,7 +33,7 @@ const Shop = () => {
       return heroineNames.some(name => product.name.includes(name));
     }
     if (filter === 'on_sale') {
-      return product.on_sale === true;
+      return product.sale_price && product.sale_price < product.price;
     }
     if (filter === 'children') {
       return product.category === 'children_books';
