@@ -3,20 +3,21 @@ import { useNavigate } from 'react-router-dom';
 import { productsAPI } from '../services/api';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
-import { Badge } from '../components/ui/badge';
+import { Label } from '../components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { toast } from '../hooks/use-toast';
-import { Check, X } from 'lucide-react';
+import { Gift, Check } from 'lucide-react';
 
 const CustomGiftBuilder = () => {
   const [products, setProducts] = useState([]);
-  const [selectedCoins, setSelectedCoins] = useState([]);
+  const [selectedCoins, setSelectedCoins] = useState(['', '', '']);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   const GIFT_SET_PRICE = 60.00;
-  const MAX_COINS = 3;
   const REGULAR_PRICE = 75.00; // 3 coins at $25 each
   const SAVINGS = REGULAR_PRICE - GIFT_SET_PRICE;
+  const MAX_COINS = 3;
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -37,24 +38,29 @@ const CustomGiftBuilder = () => {
     fetchProducts();
   }, []);
 
-  const toggleCoin = (coin) => {
-    if (selectedCoins.find(c => c.id === coin.id)) {
-      setSelectedCoins(selectedCoins.filter(c => c.id !== coin.id));
-    } else {
-      if (selectedCoins.length >= MAX_COINS) {
-        toast({
-          title: "Maximum Selection Reached",
-          description: `You can only select ${MAX_COINS} coins for your gift set.`,
-          variant: "destructive"
-        });
-        return;
-      }
-      setSelectedCoins([...selectedCoins, coin]);
-    }
+  const handleCoinSelection = (index, coinId) => {
+    const newSelection = [...selectedCoins];
+    newSelection[index] = coinId;
+    setSelectedCoins(newSelection);
   };
 
+  const getAvailableCoins = (currentIndex) => {
+    // Get coins that haven't been selected in other slots
+    return products.filter(coin => {
+      return !selectedCoins.some((selected, idx) => 
+        idx !== currentIndex && selected === coin.id
+      );
+    });
+  };
+
+  const getSelectedCoin = (coinId) => {
+    return products.find(p => p.id === coinId);
+  };
+
+  const isComplete = selectedCoins.every(coin => coin !== '');
+
   const handleCheckout = () => {
-    if (selectedCoins.length < MAX_COINS) {
+    if (!isComplete) {
       toast({
         title: "Selection Incomplete",
         description: `Please select ${MAX_COINS} coins to complete your gift set.`,
@@ -63,14 +69,13 @@ const CustomGiftBuilder = () => {
       return;
     }
 
-    // Store selection in localStorage for checkout
-    localStorage.setItem('customGiftSet', JSON.stringify(selectedCoins));
+    const selectedProducts = selectedCoins.map(id => products.find(p => p.id === id));
+    localStorage.setItem('customGiftSet', JSON.stringify(selectedProducts));
     toast({
-      title: "Success",
+      title: "Success!",
       description: "Your custom gift set is ready! Proceeding to checkout..."
     });
     
-    // In a real app, this would go to checkout
     setTimeout(() => {
       navigate('/shop');
     }, 2000);
@@ -85,125 +90,151 @@ const CustomGiftBuilder = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 py-12 px-4">
+      <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <div className="mb-8 text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Build Your Own Heroes Gift Set
+        <div className="text-center mb-8">
+          <div className="inline-block bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-full mb-4">
+            <Gift className="inline-block w-5 h-5 mr-2" />
+            <span className="font-semibold">Build Your Own Gift Set</span>
+          </div>
+          <h1 className="text-5xl font-bold text-gray-900 mb-4">
+            Choose Any 3 Challenge Coins
           </h1>
-          <p className="text-lg text-gray-600 mb-2">
-            Select any {MAX_COINS} challenge coins to create your personalized collection
+          <p className="text-lg text-gray-600 mb-4">
+            Create a personalized collection of Haiti's revolutionary heroes
           </p>
-          <p className="text-2xl font-bold text-gray-900">
-            Gift Set Price: ${GIFT_SET_PRICE.toFixed(2)}
-          </p>
-        </div>
-
-        {/* Selection Progress */}
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold text-gray-900">
-              Your Selection ({selectedCoins.length}/{MAX_COINS})
-            </h3>
-            {selectedCoins.length === MAX_COINS && (
-              <Badge className="bg-green-600">Complete!</Badge>
-            )}
-          </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-            {[...Array(MAX_COINS)].map((_, index) => (
-              <div
-                key={index}
-                className="border-2 border-dashed border-gray-300 rounded-lg p-4 h-32 flex items-center justify-center"
-              >
-                {selectedCoins[index] ? (
-                  <div className="text-center">
-                    <img
-                      src={selectedCoins[index].image}
-                      alt={selectedCoins[index].name}
-                      className="w-20 h-20 object-cover rounded-full mx-auto mb-2"
-                    />
-                    <p className="text-xs font-medium text-gray-700">
-                      {selectedCoins[index].name}
-                    </p>
-                  </div>
-                ) : (
-                  <p className="text-gray-400 text-sm">Slot {index + 1}</p>
-                )}
+          {/* Pricing */}
+          <div className="bg-white rounded-lg shadow-lg p-6 inline-block">
+            <div className="flex items-center justify-center gap-4">
+              <div className="text-left">
+                <p className="text-sm text-gray-500">Regular Price:</p>
+                <p className="text-2xl text-gray-400 line-through">${REGULAR_PRICE.toFixed(2)}</p>
               </div>
-            ))}
+              <div className="text-5xl font-bold text-gray-300">→</div>
+              <div className="text-left">
+                <p className="text-sm text-gray-500">Your Price:</p>
+                <p className="text-4xl font-bold text-green-600">${GIFT_SET_PRICE.toFixed(2)}</p>
+              </div>
+            </div>
+            <div className="mt-4 bg-green-100 text-green-800 px-4 py-2 rounded-full inline-block">
+              <span className="font-bold">Save ${SAVINGS.toFixed(2)}!</span>
+            </div>
           </div>
-
-          <Button
-            onClick={handleCheckout}
-            disabled={selectedCoins.length < MAX_COINS}
-            className="w-full bg-black text-white hover:bg-gray-800"
-            size="lg"
-          >
-            {selectedCoins.length < MAX_COINS
-              ? `Select ${MAX_COINS - selectedCoins.length} more coin${MAX_COINS - selectedCoins.length > 1 ? 's' : ''}`
-              : 'Complete Your Gift Set'}
-          </Button>
         </div>
 
-        {/* Available Coins */}
-        <div>
-          <h3 className="text-2xl font-bold text-gray-900 mb-6">Choose Your Heroes</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {products.map((coin) => {
-              const isSelected = selectedCoins.find(c => c.id === coin.id);
-              return (
-                <Card
-                  key={coin.id}
-                  className={`cursor-pointer transition-all duration-300 hover:shadow-xl ${
-                    isSelected ? 'ring-4 ring-green-500' : ''
-                  }`}
-                  onClick={() => toggleCoin(coin)}
-                >
-                  <div className="relative">
-                    <img
-                      src={coin.image}
-                      alt={coin.name}
-                      className="w-full h-64 object-cover rounded-t-lg"
-                    />
-                    {isSelected && (
-                      <div className="absolute top-2 right-2 bg-green-500 rounded-full p-2">
-                        <Check className="w-6 h-6 text-white" />
+        {/* Selection Card */}
+        <Card className="shadow-2xl">
+          <CardContent className="p-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+              <span className="bg-purple-600 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3">1</span>
+              Select Your Heroes
+            </h2>
+
+            <div className="space-y-6">
+              {[0, 1, 2].map((index) => (
+                <div key={index} className="space-y-3">
+                  <Label htmlFor={`coin-${index}`} className="text-lg font-semibold text-gray-700">
+                    Coin {index + 1}
+                  </Label>
+                  <Select
+                    value={selectedCoins[index]}
+                    onValueChange={(value) => handleCoinSelection(index, value)}
+                  >
+                    <SelectTrigger className="w-full h-14 text-lg">
+                      <SelectValue placeholder="Choose a hero..." />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {getAvailableCoins(index).map((coin) => (
+                        <SelectItem key={coin.id} value={coin.id} className="text-lg py-3">
+                          {coin.name} - {coin.year}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  
+                  {/* Show selected coin preview */}
+                  {selectedCoins[index] && (
+                    <div className="flex items-center space-x-4 bg-gray-50 rounded-lg p-4 border-2 border-green-500">
+                      <Check className="w-6 h-6 text-green-600" />
+                      <img
+                        src={getSelectedCoin(selectedCoins[index])?.image}
+                        alt={getSelectedCoin(selectedCoins[index])?.name}
+                        className="w-16 h-16 object-cover rounded-full"
+                      />
+                      <div>
+                        <p className="font-semibold text-gray-900">
+                          {getSelectedCoin(selectedCoins[index])?.name}
+                        </p>
+                        <p className="text-sm text-gray-600">
+                          {getSelectedCoin(selectedCoins[index])?.description.substring(0, 80)}...
+                        </p>
                       </div>
-                    )}
-                  </div>
-                  <CardContent className="p-4">
-                    <h4 className="font-semibold text-gray-900 mb-2">{coin.name}</h4>
-                    <p className="text-sm text-gray-600 line-clamp-2">
-                      {coin.description}
-                    </p>
-                    <div className="mt-3">
-                      <Button
-                        variant={isSelected ? 'default' : 'outline'}
-                        size="sm"
-                        className={`w-full ${
-                          isSelected ? 'bg-green-600 hover:bg-green-700' : ''
-                        }`}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          toggleCoin(coin);
-                        }}
-                      >
-                        {isSelected ? (
-                          <>
-                            <Check className="w-4 h-4 mr-2" />
-                            Selected
-                          </>
-                        ) : (
-                          'Select This Coin'
-                        )}
-                      </Button>
                     </div>
-                  </CardContent>
-                </Card>
-              );
-            })}
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Summary */}
+            <div className="mt-8 pt-8 border-t-2 border-gray-200">
+              <div className="flex justify-between items-center mb-4">
+                <span className="text-lg text-gray-600">Your Selection:</span>
+                <span className="text-lg font-semibold">
+                  {selectedCoins.filter(c => c).length} of {MAX_COINS} coins selected
+                </span>
+              </div>
+              
+              <div className="flex justify-between items-center mb-6">
+                <span className="text-2xl font-bold text-gray-900">Total Price:</span>
+                <div className="text-right">
+                  <p className="text-sm text-gray-500 line-through">${REGULAR_PRICE.toFixed(2)}</p>
+                  <p className="text-3xl font-bold text-green-600">${GIFT_SET_PRICE.toFixed(2)}</p>
+                </div>
+              </div>
+
+              <Button
+                onClick={handleCheckout}
+                disabled={!isComplete}
+                className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700 h-14 text-lg font-semibold"
+                size="lg"
+              >
+                {isComplete ? (
+                  <>
+                    <Check className="w-5 h-5 mr-2" />
+                    Complete Your Gift Set - ${GIFT_SET_PRICE.toFixed(2)}
+                  </>
+                ) : (
+                  `Select ${MAX_COINS - selectedCoins.filter(c => c).length} more coin${MAX_COINS - selectedCoins.filter(c => c).length > 1 ? 's' : ''}`
+                )}
+              </Button>
+
+              {isComplete && (
+                <p className="text-center text-sm text-gray-600 mt-4">
+                  Includes premium gift box with certificates of authenticity
+                </p>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Benefits */}
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="bg-white rounded-lg p-4 text-center shadow">
+            <div className="text-3xl mb-2">🎁</div>
+            <p className="font-semibold text-gray-900">Premium Packaging</p>
+            <p className="text-sm text-gray-600">Beautiful gift box included</p>
+          </div>
+          <div className="bg-white rounded-lg p-4 text-center shadow">
+            <div className="text-3xl mb-2">📜</div>
+            <p className="font-semibold text-gray-900">Certificate</p>
+            <p className="text-sm text-gray-600">Authenticity guaranteed</p>
+          </div>
+          <div className="bg-white rounded-lg p-4 text-center shadow">
+            <div className="text-3xl mb-2">💰</div>
+            <p className="font-semibold text-gray-900">Save $15</p>
+            <p className="text-sm text-gray-600">Discounted bundle price</p>
           </div>
         </div>
       </div>
