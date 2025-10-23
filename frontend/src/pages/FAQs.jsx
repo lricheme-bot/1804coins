@@ -41,8 +41,8 @@ const FAQs = () => {
       answer: 'Yes, each coin comes with a certificate of authenticity that includes the coin\'s specifications, mintage number, and unique serial number.'
     },
     {
-      question: 'Will these coins increase in value?',
-      answer: 'While we cannot guarantee future value, limited mintage commemorative coins often appreciate over time, especially those celebrating significant historical events. Value depends on various factors including condition, rarity, and collector demand.'
+      question: 'Are these coins collectible items?',
+      answer: 'Yes, these challenge coins are collectible items that celebrate Haiti\'s independence heroes. Each coin is a limited edition piece designed for collectors, history enthusiasts, and those who wish to honor the legacy of Haitian revolutionary figures.'
     },
     {
       question: 'Can I pre-order upcoming coin releases?',
