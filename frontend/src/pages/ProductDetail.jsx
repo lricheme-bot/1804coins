@@ -37,6 +37,14 @@ const ProductDetail = () => {
     fetchData();
   }, [id]);
 
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-gray-500 text-lg">Loading...</p>
+      </div>
+    );
+  }
+
   if (!product) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -50,7 +58,7 @@ const ProductDetail = () => {
     );
   }
 
-  const handleAddComment = () => {
+  const handleAddComment = async () => {
     if (!user) {
       toast({
         title: "Login Required",
