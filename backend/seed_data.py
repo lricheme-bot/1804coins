@@ -89,5 +89,50 @@ products_data = [
         "weight": "28g",
         "diameter": "39mm",
         "mintage": "Limited Edition"
+    },
+    {
+        "_id": "7",
+        "name": "Heroines of Haiti Gift Set",
+        "description": "Exclusive gift set featuring three heroines of the Haitian Revolution: Catherine Flon (the seamstress who sewed the first Haitian flag), Sanite Belair (fearless freedom fighter), and Marie-Jeanne Lamartinière (warrior of Crête-à-Pierrot). This commemorative collection celebrates the courage and sacrifice of Haiti's revolutionary women. Each coin is individually packaged in a premium display case with certificates of authenticity.",
+        "price": 65.00,
+        "image": "https://images.squarespace-cdn.com/content/v1/67d6ef5142cdf803b50d47be/5d3d4d20-30c3-4e65-8dad-aef98816c295/Catherine+Flon+Sewing+Haiti%27s+Flag+%281%29.png",
+        "status": "in_stock",
+        "category": "gift_set",
+        "featured": True,
+        "year": "1803-1804",
+        "material": "Zinc alloy with colorized enamel",
+        "weight": "84g (3 coins)",
+        "diameter": "39mm each",
+        "mintage": "Limited Edition"
+    },
+    {
+        "_id": "8",
+        "name": "Founders Collection Gift Set",
+        "description": "Complete commemorative set honoring the founding fathers of Haiti's independence. Includes Emperor Jean-Jacques Dessalines, King Henri Christophe, and President Alexandre Pétion. This premium gift set celebrates the leaders who shaped Haiti into the first Black-led republic. Perfect for collectors and history enthusiasts. Comes in an elegant presentation box with historical documentation.",
+        "price": 70.00,
+        "image": "https://images.squarespace-cdn.com/content/v1/67d6ef5142cdf803b50d47be/e08c4e83-f75c-4fff-b87e-d7bb73ae04ac/JJ+Dessalines+May+13%2C+2025%2C+07_44_25+PM.png",
+        "status": "in_stock",
+        "category": "gift_set",
+        "featured": True,
+        "year": "1804-1820",
+        "material": "Zinc alloy with colorized enamel",
+        "weight": "84g (3 coins)",
+        "diameter": "39mm each",
+        "mintage": "Limited Edition"
+    },
+    {
+        "_id": "9",
+        "name": "Complete Revolutionary Heroes Collection",
+        "description": "The ultimate collection featuring all six revolutionary heroes of Haiti. This comprehensive gift set includes Dessalines, Catherine Flon, Sanite Belair, Marie-Jeanne Lamartinière, Alexandre Pétion, and Henri Christophe. Each coin tells the story of Haiti's remarkable journey to independence. Presented in a luxurious wooden display case with individual compartments and a commemorative booklet detailing each hero's contributions.",
+        "price": 140.00,
+        "image": "https://images.squarespace-cdn.com/content/v1/67d6ef5142cdf803b50d47be/5b2777b5-67d8-4e5b-b2ad-73d8011ad3fb/Galer%C3%ADa+de+Monedas+Hist%C3%B3ricas.png",
+        "status": "in_stock",
+        "category": "gift_set",
+        "featured": False,
+        "year": "1802-1820",
+        "material": "Zinc alloy with colorized enamel",
+        "weight": "168g (6 coins)",
+        "diameter": "39mm each",
+        "mintage": "Limited Edition"
     }
 ]
