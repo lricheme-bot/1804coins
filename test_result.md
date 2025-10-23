@@ -177,6 +177,78 @@ backend:
           agent: "testing"
           comment: "✅ Create comment endpoint working correctly. Properly handles JWT authentication, creates comments with all required fields (id, product_id, user_id, username, comment, timestamp, likes). Authentication and authorization working as expected."
 
+  - task: "Cart - Add Items to Cart"
+    implemented: true
+    working: true
+    file: "backend/cart_routes.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ Add to cart endpoint working correctly. Successfully added products 1, 3, and 14 with specified quantities. Proper authentication required and cart item count tracking working."
+
+  - task: "Cart - Get Cart Contents"
+    implemented: true
+    working: true
+    file: "backend/cart_routes.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ Get cart endpoint working correctly. Returns proper cart structure with items array, total calculation ($135.0), and item count (4). All required fields present."
+
+  - task: "Cart - Update Item Quantity"
+    implemented: true
+    working: true
+    file: "backend/cart_routes.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ Update cart quantity endpoint working correctly. Successfully updated product 1 quantity from 1 to 3. Cart total recalculated properly to $185.0."
+
+  - task: "Cart - Remove Item from Cart"
+    implemented: true
+    working: true
+    file: "backend/cart_routes.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ Remove item from cart endpoint working correctly. Successfully removed product 3 from cart. Proper authentication and item removal confirmation."
+
+  - task: "Cart - Checkout Process"
+    implemented: true
+    working: true
+    file: "backend/cart_routes.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ Checkout endpoint working correctly. Successfully created order with ID 68faaec55e2fc659815a5607, total $135.0. Cart cleared after successful checkout."
+
+  - task: "Cart - Get User Orders"
+    implemented: true
+    working: true
+    file: "backend/cart_routes.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ Get orders endpoint working correctly. Successfully retrieved user orders with proper structure. Order contains correct items, total, status (pending), and creation timestamp. Minor: Order uses '_id' field instead of 'id' but this is acceptable MongoDB convention."
+
 frontend:
   # Frontend testing not performed as per instructions
 
