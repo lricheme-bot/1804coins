@@ -234,8 +234,9 @@ async def seed_products():
     
     return {"message": f"Seeded {len(products_data)} products successfully"}
 
-# Include the router in the main app
+# Include the routers in the main app
 app.include_router(api_router)
+app.include_router(admin_router, prefix="/api")
 
 app.add_middleware(
     CORSMiddleware,
