@@ -174,7 +174,7 @@ const ProductDetail = () => {
                   )}
                 </div>
               </div>
-              <p className="text-gray-600 text-lg">Commemorative Coin</p>
+              <p className="text-gray-600 text-lg">Challenge Coin - Haitian Independence Hero</p>
             </div>
 
             <div className="flex items-center space-x-3">
