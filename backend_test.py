@@ -607,8 +607,14 @@ class BackendTester:
         """Test login with wrong password (should fail)"""
         print_test_header("Auth - Wrong Password Login (Should Fail)")
         
+        if not self.user_data:
+            print_error("No user data from registration")
+            self.test_results['failed'] += 1
+            self.test_results['errors'].append("No user data from registration")
+            return False
+            
         wrong_login = {
-            "email": "marie.claire@haiti.com",
+            "email": self.user_data['email'],
             "password": "WrongPassword123!"
         }
         
