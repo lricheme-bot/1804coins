@@ -13,8 +13,10 @@ const CustomGiftBuilder = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  const GIFT_SET_PRICE = 68.00;
+  const GIFT_SET_PRICE = 60.00;
   const MAX_COINS = 3;
+  const REGULAR_PRICE = 75.00; // 3 coins at $25 each
+  const SAVINGS = REGULAR_PRICE - GIFT_SET_PRICE;
 
   useEffect(() => {
     const fetchProducts = async () => {
