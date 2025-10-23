@@ -20,6 +20,7 @@ from auth import (
 )
 from seed_data import products_data
 from admin_routes import admin_router, set_db
+from cart_routes import cart_router, set_cart_db
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
