@@ -11,14 +11,21 @@ export const AuthProvider = ({ children }) => {
     // Check if user is logged in
     const initAuth = async () => {
       const token = localStorage.getItem('token');
-      if (token) {
+      const storedUser = localStorage.getItem('user');
+      
+      if (token && storedUser) {
         try {
+          // First set user from localStorage for immediate access
+          setUser(JSON.parse(storedUser));
+          // Then verify with backend
           const userData = await authAPI.getMe();
           setUser(userData);
         } catch (error) {
           console.error('Failed to fetch user:', error);
+          // If verification fails, clear everything
           localStorage.removeItem('token');
           localStorage.removeItem('user');
+          setUser(null);
         }
       }
       setLoading(false);
