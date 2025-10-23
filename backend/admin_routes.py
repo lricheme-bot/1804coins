@@ -32,9 +32,17 @@ async def require_admin(current_user: dict = Depends(get_current_user)):
 # Create Product
 @admin_router.post("/products", response_model=Product)
 async def create_product(product_data: dict, admin: dict = Depends(require_admin)):
-    # Generate new ID
-    last_product = await db.products.find_one(sort=[("_id", -1)])
-    new_id = str(int(last_product["_id"]) + 1) if last_product else "1"
+    # Generate new ID by finding the highest numeric ID
+    all_products = await db.products.find().to_list(1000)
+    max_id = 0
+    for product in all_products:
+        try:
+            product_id = int(product["_id"])
+            if product_id > max_id:
+                max_id = product_id
+        except (ValueError, TypeError):
+            continue
+    new_id = str(max_id + 1)
     
     product_data["_id"] = new_id
     result = await db.products.insert_one(product_data)
