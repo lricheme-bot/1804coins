@@ -38,6 +38,8 @@ const AdminDashboard = () => {
     sale_price: '',
     sale_label: ''
   });
+  const [uploadingImage, setUploadingImage] = useState(false);
+  const [imagePreview, setImagePreview] = useState('');
 
   useEffect(() => {
     checkAdminStatus();
