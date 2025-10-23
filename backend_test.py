@@ -105,10 +105,12 @@ class BackendTester:
         """Test user registration endpoint"""
         print_test_header("Auth - Register")
         
-        # Use realistic test data
+        # Use realistic test data with timestamp to avoid duplicates
+        import time
+        timestamp = str(int(time.time()))
         test_user = {
-            "username": "marie_claire",
-            "email": "marie.claire@haiti.com", 
+            "username": f"marie_claire_{timestamp}",
+            "email": f"marie.claire.{timestamp}@haiti.com", 
             "password": "Haiti1804!"
         }
         
