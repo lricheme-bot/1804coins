@@ -27,6 +27,11 @@ const Shop = () => {
 
   const filteredProducts = products.filter(product => {
     if (filter === 'all') return true;
+    if (filter === 'heroines') {
+      // Filter for female heroes
+      const heroineNames = ['Catherine Flon', 'Sanite Belair', 'Marie-Jeanne Lamartinière'];
+      return heroineNames.some(name => product.name.includes(name));
+    }
     return product.category === filter;
   });
 
