@@ -202,8 +202,8 @@ products_data = [
     {
         "_id": "14",
         "name": "Build Your Own Heroes Gift Set",
-        "description": "Create a personalized gift set by choosing any 3 challenge coins from our collection! Perfect for gifting or creating your own curated collection. Your selection will be beautifully packaged in our premium gift box with individual protective sleeves and certificates of authenticity. Select your heroes during checkout. Price includes premium packaging and display case.",
-        "price": 68.00,
+        "description": "Create a personalized gift set by choosing any 3 challenge coins from our collection! Perfect for gifting or creating your own curated collection. Your selection will be beautifully packaged in our premium gift box with individual protective sleeves and certificates of authenticity. Select your heroes during checkout. Price includes premium packaging and display case. Save $15 compared to buying individually!",
+        "price": 60.00,
         "image": "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?w=500&h=500&fit=crop",
         "status": "in_stock",
         "category": "custom",
