@@ -13,6 +13,7 @@ import { toast } from '../hooks/use-toast';
 const ProductDetail = () => {
   const { id } = useParams();
   const { user } = useAuth();
+  const { addToCart } = useCart();
   const [product, setProduct] = useState(null);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
