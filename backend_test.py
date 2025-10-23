@@ -80,6 +80,9 @@ class BackendTester:
                 response = requests.put(url, json=data, headers=headers, timeout=30)
             elif method == 'DELETE':
                 response = requests.delete(url, headers=headers, timeout=30)
+            else:
+                print_error(f"Unsupported HTTP method: {method}")
+                return None
             
             print_info(f"Response status: {response.status_code}")
             
