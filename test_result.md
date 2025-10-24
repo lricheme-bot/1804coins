@@ -468,9 +468,9 @@ frontend:
 
   - task: "Product Detail - Add to Cart"
     implemented: true
-    working: false
+    working: true
     file: "frontend/src/pages/ProductDetail.jsx"
-    stuck_count: 2
+    stuck_count: 0
     priority: "high"
     needs_retesting: false
     status_history:
@@ -480,6 +480,9 @@ frontend:
         - working: false
           agent: "testing"
           comment: "❌ RE-TEST FAILED: Could not complete Add to Cart testing due to script locator issues. However, backend logs show successful API calls (GET /api/products/1, GET /api/products/3) but no POST /api/cart/add requests, indicating frontend Add to Cart button clicks are not triggering API calls. Authentication working (successful /api/auth/me calls). Issue likely in onClick handler or cart context integration."
+        - working: true
+          agent: "testing"
+          comment: "✅ Add to Cart functionality working correctly. Successfully added Jean Jacques Dessalines coin to cart. API call POST /api/cart/add returns 200 OK, success toast displays 'Added to Cart! Emp. Jean Jacques Dessalines has been added to your cart.' Cart properly updates with item. Previous issues appear to have been resolved."
 
   - task: "Shopping Cart Page"
     implemented: true
