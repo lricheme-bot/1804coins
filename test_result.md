@@ -525,15 +525,18 @@ frontend:
 
   - task: "Orders Page"
     implemented: true
-    working: "NA"
+    working: false
     file: "frontend/src/pages/Orders.jsx"
-    stuck_count: 0
-    priority: "medium"
-    needs_retesting: true
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: false
     status_history:
         - working: "NA"
           agent: "testing"
           comment: "Cannot test orders page because no orders can be created due to checkout process being blocked by add to cart issues. Orders page UI appears to be implemented correctly."
+        - working: false
+          agent: "testing"
+          comment: "❌ ORDERS PAGE RUNTIME ERROR: Critical JavaScript error 'Cannot read properties of undefined (reading 'slice')' at Orders.jsx:93. Backend API /api/cart/orders returns orders with '_id' field, but frontend code expects 'id' field. Line 93: order.id.slice(-8) fails because order.id is undefined. Backend returns correct data structure but field name mismatch causes Orders page to crash. EXACT ERROR: TypeError: Cannot read properties of undefined (reading 'slice') at Orders component."
 
 agent_communication:
     - agent: "testing"
