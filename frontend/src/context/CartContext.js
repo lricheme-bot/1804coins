@@ -19,10 +19,12 @@ export const CartProvider = ({ children }) => {
 
   const fetchCart = async () => {
     try {
+      console.log('[CartContext] Fetching cart...');
       const data = await cartAPI.getCart();
+      console.log('[CartContext] Cart data received:', data);
       setCart(data);
     } catch (error) {
-      console.error('Failed to fetch cart:', error);
+      console.error('[CartContext] Failed to fetch cart:', error);
     }
   };
 
