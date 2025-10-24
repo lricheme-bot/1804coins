@@ -144,13 +144,13 @@ async def get_products():
     # Return with 'id' field for frontend
     return [{"id": str(p["_id"]), **{k: v for k, v in p.items() if k != "_id"}} for p in products]
 
-@api_router.get("/products/{product_id}", response_model=Product)
+@api_router.get("/products/{product_id}")
 async def get_product(product_id: str):
     product = await db.products.find_one({"_id": product_id})
     if not product:
         raise HTTPException(status_code=404, detail="Product not found")
     
-    return Product(**{**product, "_id": str(product["_id"])})
+    return {"id": str(product["_id"]), **{k: v for k, v in product.items() if k != "_id"}}
 
 # ============== Comment Endpoints ==============
 
