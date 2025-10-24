@@ -138,10 +138,11 @@ async def get_me(current_user: dict = Depends(get_current_user)):
 
 # ============== Product Endpoints ==============
 
-@api_router.get("/products", response_model=List[Product])
+@api_router.get("/products")
 async def get_products():
     products = await db.products.find().to_list(100)
-    return [Product(**{**p, "_id": str(p["_id"])}) for p in products]
+    # Return with 'id' field for frontend
+    return [{"id": str(p["_id"]), **{k: v for k, v in p.items() if k != "_id"}} for p in products]
 
 @api_router.get("/products/{product_id}", response_model=Product)
 async def get_product(product_id: str):
