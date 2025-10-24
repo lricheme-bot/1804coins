@@ -9,10 +9,18 @@ import { toast } from '../hooks/use-toast';
 import { Trash2, Plus, Minus, ShoppingBag, ArrowRight } from 'lucide-react';
 
 const Cart = () => {
-  const { cart, loading, updateQuantity, removeItem, checkout } = useCart();
+  const { cart, loading, updateQuantity, removeItem, checkout, fetchCart } = useCart();
   const { user } = useAuth();
   const navigate = useNavigate();
   const [checkingOut, setCheckingOut] = useState(false);
+
+  // Force refresh cart when component mounts
+  React.useEffect(() => {
+    if (user) {
+      console.log('[Cart Page] Fetching cart on mount');
+      fetchCart();
+    }
+  }, [user]);
 
   if (!user) {
     return (
