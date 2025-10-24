@@ -47,6 +47,7 @@ class Product(BaseModel):
 
     class Config:
         populate_by_name = True
+        allow_population_by_field_name = True
 
 # Comment Models
 class CommentCreate(BaseModel):
