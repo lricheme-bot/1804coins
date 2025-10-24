@@ -27,10 +27,12 @@ const CustomGiftBuilder = () => {
     const fetchProducts = async () => {
       try {
         const data = await productsAPI.getAll();
+        console.log('Fetched products:', data);
         // Filter only individual coins (not gift sets, accessories, etc)
         const coins = data.filter(p => 
-          ['historical', 'presidential', 'royal'].includes(p.category)
+          p && p.id && ['historical', 'presidential', 'royal'].includes(p.category)
         );
+        console.log('Filtered coins:', coins);
         setProducts(coins);
       } catch (error) {
         console.error('Failed to fetch products:', error);
