@@ -510,15 +510,18 @@ frontend:
 
   - task: "Checkout Process"
     implemented: true
-    working: "NA"
+    working: false
     file: "frontend/src/pages/Cart.jsx"
-    stuck_count: 0
+    stuck_count: 1
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
         - working: "NA"
           agent: "testing"
           comment: "Cannot test checkout process because cart is empty due to add to cart functionality failing. Checkout button and flow appear to be implemented correctly."
+        - working: false
+          agent: "testing"
+          comment: "❌ CHECKOUT RUNTIME ERROR: Checkout API call succeeds (POST /api/cart/checkout returns 200), cart is cleared, but Orders page crashes with 'Cannot read properties of undefined (reading 'slice')' error at Orders.jsx:93. Backend returns '_id' field but frontend Orders component expects 'id' field on line 93: order.id.slice(-8). Checkout functionality works but post-checkout navigation fails due to field name mismatch between backend MongoDB '_id' and frontend expected 'id'."
 
   - task: "Orders Page"
     implemented: true
