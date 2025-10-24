@@ -453,7 +453,7 @@ frontend:
 
   - task: "Custom Gift Builder - Coin Selection"
     implemented: true
-    working: false
+    working: true
     file: "frontend/src/pages/CustomGiftBuilder.jsx"
     stuck_count: 2
     priority: "high"
@@ -465,6 +465,9 @@ frontend:
         - working: false
           agent: "testing"
           comment: "❌ RE-TEST FAILED: Critical React key prop errors causing duplicate keys (0-undefined, 1-undefined, 2-undefined). Dropdowns fail to register selections due to element interception issues. Console shows 'Encountered two children with the same key' errors repeatedly. The getAvailableCoins function is generating undefined coin.id values causing React rendering issues. State management completely broken - counter stays at '0 of 3 coins selected'. REQUIRES IMMEDIATE FIX of key prop generation in SelectItem components."
+        - working: true
+          agent: "testing"
+          comment: "✅ FINAL E2E TEST: Custom Gift Builder now working correctly. Successfully selected 3 coins (IDs: 1, 3, 5), counter properly updates to '3 of 3 coins selected', Complete button appears and functions correctly, redirects to cart after completion. Coin selection state management working properly. Previous React key prop issues appear to have been resolved."
 
   - task: "Product Detail - Add to Cart"
     implemented: true
