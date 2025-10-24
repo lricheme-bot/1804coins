@@ -470,13 +470,16 @@ frontend:
     implemented: true
     working: false
     file: "frontend/src/pages/ProductDetail.jsx"
-    stuck_count: 1
+    stuck_count: 2
     priority: "high"
     needs_retesting: false
     status_history:
         - working: false
           agent: "testing"
           comment: "❌ Add to Cart functionality failing. Product page loads correctly showing Jean Jacques Dessalines coin with proper details and $25 price. Add to Cart button is present and clickable, but API call fails with 422 error. Console shows 'Failed to add to cart: AxiosError' and 'Failed to load resource: the server responded with a status of 422'. Cart remains empty after clicking Add to Cart. Backend API works correctly when tested directly with curl, suggesting frontend authentication or request formatting issue."
+        - working: false
+          agent: "testing"
+          comment: "❌ RE-TEST FAILED: Could not complete Add to Cart testing due to script locator issues. However, backend logs show successful API calls (GET /api/products/1, GET /api/products/3) but no POST /api/cart/add requests, indicating frontend Add to Cart button clicks are not triggering API calls. Authentication working (successful /api/auth/me calls). Issue likely in onClick handler or cart context integration."
 
   - task: "Shopping Cart Page"
     implemented: true
