@@ -1,0 +1,149 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "shop": "Boutique",
+    "about": "À propos",
+    "contact": "Contact",
+    "faqs": "FAQ",
+    "cart": "Panier",
+    "login": "Connexion",
+    "logout": "Déconnexion",
+    "admin": "Admin",
+    "announcement": "Nous avons maintenant des pièces défi Sanite Belair en stock"
+  },
+  "hero": {
+    "title": "Préserver le passé d'Haïti dans le métal et la mémoire",
+    "subtitle": "De 1804 à vos mains - L'héritage continue.",
+    "description": "Découvrez notre collection exclusive de pièces défi honorant les héros révolutionnaires et combattants de l'indépendance d'Haïti.",
+    "shopAll": "Tout voir"
+  },
+  "products": {
+    "featured": "Produits en vedette",
+    "shopAll": "Voir tout",
+    "challengeCoin": "Pièce défi",
+    "comingSoon": "Bientôt disponible",
+    "addToCart": "Ajouter au panier",
+    "specifications": "Spécifications",
+    "year": "Année",
+    "weight": "Poids",
+    "diameter": "Diamètre",
+    "material": "Matériau",
+    "mintage": "Tirage"
+  },
+  "giftBuilder": {
+    "title": "Créez votre coffret cadeau",
+    "subtitle": "Choisissez 3 pièces défi",
+    "description": "Créez une collection personnalisée des héros révolutionnaires d'Haïti",
+    "regularPrice": "Prix régulier :",
+    "yourPrice": "Votre prix :",
+    "save": "Économisez",
+    "selectHeroes": "Sélectionnez vos héros",
+    "chooseCoin": "Pièce",
+    "chooseHero": "Choisissez un héros...",
+    "yourSelection": "Votre sélection :",
+    "coinsSelected": "sur 3 pièces sélectionnées",
+    "totalPrice": "Prix total :",
+    "complete": "Complétez votre coffret cadeau",
+    "selectMore": "Sélectionnez {{count}} pièce de plus",
+    "selectMore_plural": "Sélectionnez {{count}} pièces de plus",
+    "premiumPackaging": "Emballage premium",
+    "premiumPackagingDesc": "Belle boîte cadeau incluse",
+    "certificate": "Certificat",
+    "certificateDesc": "Authenticité garantie",
+    "savings": "Économisez 15$",
+    "savingsDesc": "Prix groupé réduit"
+  },
+  "cart": {
+    "title": "Panier d'achat",
+    "emptyTitle": "Votre panier est vide",
+    "emptyMessage": "Ajoutez de superbes pièces défi à votre panier !",
+    "shopNow": "Magasiner maintenant",
+    "remove": "Retirer",
+    "orderSummary": "Résumé de la commande",
+    "subtotal": "Sous-total",
+    "items": "articles",
+    "shipping": "Livraison",
+    "freeShipping": "GRATUITE",
+    "total": "Total",
+    "checkout": "Commander",
+    "continueShopping": "Continuer les achats",
+    "processing": "Traitement..."
+  },
+  "orders": {
+    "title": "Mes commandes",
+    "noOrders": "Aucune commande",
+    "noOrdersMessage": "Vous n'avez pas encore passé de commande",
+    "startShopping": "Commencer à magasiner",
+    "order": "Commande",
+    "status": {
+      "pending": "EN ATTENTE",
+      "completed": "COMPLÉTÉE",
+      "cancelled": "ANNULÉE"
+    },
+    "quantity": "Quantité :",
+    "each": "chacun"
+  },
+  "auth": {
+    "welcomeBack": "Bienvenue",
+    "loginSubtitle": "Connectez-vous à votre compte pour continuer",
+    "createAccount": "Créer un compte",
+    "registerSubtitle": "Inscrivez-vous pour rejoindre notre communauté",
+    "email": "Courriel",
+    "password": "Mot de passe",
+    "username": "Nom d'utilisateur",
+    "confirmPassword": "Confirmer le mot de passe",
+    "login": "Connexion",
+    "register": "S'inscrire",
+    "noAccount": "Vous n'avez pas de compte ?",
+    "hasAccount": "Vous avez déjà un compte ?",
+    "registerHere": "Inscrivez-vous ici",
+    "loginHere": "Connectez-vous ici",
+    "loginRequired": "Connexion requise",
+    "pleaseLogin": "Veuillez vous connecter pour"
+  },
+  "comments": {
+    "title": "Commentaires",
+    "placeholder": "Partagez vos impressions sur cette pièce...",
+    "postComment": "Publier le commentaire",
+    "noComments": "Aucun commentaire pour l'instant. Soyez le premier à commenter !",
+    "loginToComment": "Veuillez vous connecter pour publier un commentaire"
+  },
+  "filters": {
+    "filterBy": "Filtrer par :",
+    "sortBy": "Trier par :",
+    "all": "Tout",
+    "giftSets": "Coffrets cadeaux",
+    "heroines": "Héroïnes",
+    "historical": "Historique",
+    "presidential": "Présidentiel",
+    "royal": "Royal",
+    "accessories": "Accessoires",
+    "childrensBooks": "Livres pour enfants",
+    "onSale": "En solde",
+    "featured": "En vedette",
+    "priceLowToHigh": "Prix : Bas à élevé",
+    "priceHighToLow": "Prix : Élevé à bas"
+  },
+  "status": {
+    "inStock": "En stock",
+    "limitedStock": "Stock limité",
+    "comingSoon": "Bientôt disponible"
+  },
+  "footer": {
+    "about": "À propos de 1804 Coins",
+    "aboutDesc": "Préserver l'histoire révolutionnaire d'Haïti à travers des pièces défi magnifiquement conçues honorant les héros de l'indépendance.",
+    "quickLinks": "Liens rapides",
+    "customerService": "Service client",
+    "stayConnected": "Restez connecté",
+    "subscribeMessage": "Abonnez-vous pour recevoir des mises à jour sur les nouvelles versions et offres spéciales.",
+    "copyright": "1804 Coins. Tous droits réservés."
+  },
+  "admin": {
+    "dashboard": "Tableau de bord admin",
+    "manageProducts": "Gérer vos produits",
+    "addNewProduct": "Ajouter un nouveau produit",
+    "allProducts": "Tous les produits",
+    "editProduct": "Modifier le produit",
+    "deleteProduct": "Supprimer le produit"
+  }
+}

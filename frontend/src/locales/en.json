@@ -1,0 +1,149 @@
+{
+  "nav": {
+    "home": "Home",
+    "shop": "Shop",
+    "about": "About",
+    "contact": "Contact",
+    "faqs": "FAQs",
+    "cart": "Cart",
+    "login": "Login",
+    "logout": "Logout",
+    "admin": "Admin",
+    "announcement": "Now we have Sanite Belair Challenge coins in stock"
+  },
+  "hero": {
+    "title": "Preserving Haiti's Past in Metal and Memory",
+    "subtitle": "From 1804 To Your Hands - The Legacy Lives On.",
+    "description": "Discover our exclusive collection of challenge coins honoring Haiti's revolutionary heroes and independence fighters.",
+    "shopAll": "Shop All"
+  },
+  "products": {
+    "featured": "Featured Products",
+    "shopAll": "Shop all",
+    "challengeCoin": "Challenge Coin",
+    "comingSoon": "Coming soon",
+    "addToCart": "Add to Cart",
+    "specifications": "Specifications",
+    "year": "Year",
+    "weight": "Weight",
+    "diameter": "Diameter",
+    "material": "Material",
+    "mintage": "Mintage"
+  },
+  "giftBuilder": {
+    "title": "Build Your Own Gift Set",
+    "subtitle": "Choose Any 3 Challenge Coins",
+    "description": "Create a personalized collection of Haiti's revolutionary heroes",
+    "regularPrice": "Regular Price:",
+    "yourPrice": "Your Price:",
+    "save": "Save",
+    "selectHeroes": "Select Your Heroes",
+    "chooseCoin": "Coin",
+    "chooseHero": "Choose a hero...",
+    "yourSelection": "Your Selection:",
+    "coinsSelected": "of 3 coins selected",
+    "totalPrice": "Total Price:",
+    "complete": "Complete Your Gift Set",
+    "selectMore": "Select {{count}} more coin",
+    "selectMore_plural": "Select {{count}} more coins",
+    "premiumPackaging": "Premium Packaging",
+    "premiumPackagingDesc": "Beautiful gift box included",
+    "certificate": "Certificate",
+    "certificateDesc": "Authenticity guaranteed",
+    "savings": "Save $15",
+    "savingsDesc": "Discounted bundle price"
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "emptyTitle": "Your Cart is Empty",
+    "emptyMessage": "Add some amazing challenge coins to your cart!",
+    "shopNow": "Shop Now",
+    "remove": "Remove",
+    "orderSummary": "Order Summary",
+    "subtotal": "Subtotal",
+    "items": "items",
+    "shipping": "Shipping",
+    "freeShipping": "FREE",
+    "total": "Total",
+    "checkout": "Checkout",
+    "continueShopping": "Continue Shopping",
+    "processing": "Processing..."
+  },
+  "orders": {
+    "title": "My Orders",
+    "noOrders": "No Orders Yet",
+    "noOrdersMessage": "You haven't placed any orders yet",
+    "startShopping": "Start Shopping",
+    "order": "Order",
+    "status": {
+      "pending": "PENDING",
+      "completed": "COMPLETED",
+      "cancelled": "CANCELLED"
+    },
+    "quantity": "Quantity:",
+    "each": "each"
+  },
+  "auth": {
+    "welcomeBack": "Welcome Back",
+    "loginSubtitle": "Login to your account to continue",
+    "createAccount": "Create Account",
+    "registerSubtitle": "Register to join our community",
+    "email": "Email",
+    "password": "Password",
+    "username": "Username",
+    "confirmPassword": "Confirm Password",
+    "login": "Login",
+    "register": "Register",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "registerHere": "Register here",
+    "loginHere": "Login here",
+    "loginRequired": "Login Required",
+    "pleaseLogin": "Please login to"
+  },
+  "comments": {
+    "title": "Comments",
+    "placeholder": "Share your thoughts about this coin...",
+    "postComment": "Post Comment",
+    "noComments": "No comments yet. Be the first to comment!",
+    "loginToComment": "Please login to post a comment"
+  },
+  "filters": {
+    "filterBy": "Filter by:",
+    "sortBy": "Sort by:",
+    "all": "All",
+    "giftSets": "Gift Sets",
+    "heroines": "Heroines",
+    "historical": "Historical",
+    "presidential": "Presidential",
+    "royal": "Royal",
+    "accessories": "Accessories",
+    "childrensBooks": "Children's Books",
+    "onSale": "On Sale",
+    "featured": "Featured",
+    "priceLowToHigh": "Price: Low to High",
+    "priceHighToLow": "Price: High to Low"
+  },
+  "status": {
+    "inStock": "In Stock",
+    "limitedStock": "Limited Stock",
+    "comingSoon": "Coming Soon"
+  },
+  "footer": {
+    "about": "About 1804 Coins",
+    "aboutDesc": "Preserving Haiti's revolutionary history through beautifully crafted challenge coins honoring independence heroes.",
+    "quickLinks": "Quick Links",
+    "customerService": "Customer Service",
+    "stayConnected": "Stay Connected",
+    "subscribeMessage": "Subscribe to get updates on new releases and special offers.",
+    "copyright": "1804 Coins. All rights reserved."
+  },
+  "admin": {
+    "dashboard": "Admin Dashboard",
+    "manageProducts": "Manage your products",
+    "addNewProduct": "Add New Product",
+    "allProducts": "All Products",
+    "editProduct": "Edit Product",
+    "deleteProduct": "Delete Product"
+  }
+}
