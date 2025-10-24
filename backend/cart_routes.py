@@ -196,10 +196,11 @@ async def checkout(current_user: dict = Depends(get_current_user)):
     )
 
 # Get user's orders
-@cart_router.get("/orders", response_model=List[Order])
+@cart_router.get("/orders")
 async def get_orders(current_user: dict = Depends(get_current_user)):
     user_id = current_user["user_id"]
     
     orders = await db.orders.find({"user_id": user_id}).sort("created_at", -1).to_list(100)
     
-    return [Order(**{**order, "_id": str(order["_id"])}) for order in orders]
+    # Return with 'id' field instead of '_id'
+    return [{"id": str(order["_id"]), **{k: v for k, v in order.items() if k != "_id"}} for order in orders]
