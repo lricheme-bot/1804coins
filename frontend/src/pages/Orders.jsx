@@ -90,7 +90,7 @@ const Orders = () => {
               <CardHeader>
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                   <div>
-                    <CardTitle className="text-xl">Order #{order.id.slice(-8)}</CardTitle>
+                    <CardTitle className="text-xl">Order #{(order.id || order._id).slice(-8)}</CardTitle>
                     <div className="flex items-center text-gray-600 text-sm mt-2">
                       <Calendar className="w-4 h-4 mr-2" />
                       {formatDate(order.created_at)}
