@@ -486,9 +486,9 @@ frontend:
 
   - task: "Shopping Cart Page"
     implemented: true
-    working: false
+    working: true
     file: "frontend/src/pages/Cart.jsx"
-    stuck_count: 2
+    stuck_count: 0
     priority: "high"
     needs_retesting: false
     status_history:
@@ -498,6 +498,9 @@ frontend:
         - working: false
           agent: "testing"
           comment: "❌ RE-TEST CONFIRMED: Cart remains empty with 'Your Cart is Empty' message displayed. No items successfully added due to upstream failures in Custom Gift Builder and Add to Cart functionality. Cart UI rendering correctly but no data to display. Backend cart API working (successful GET /api/cart calls returning empty cart). Issue is in frontend item addition processes."
+        - working: true
+          agent: "testing"
+          comment: "✅ Shopping Cart page working correctly. Successfully displays cart items after Add to Cart operation. Shows Jean Jacques Dessalines coin with correct price ($25.00), quantity controls, remove button, and order summary. Cart total calculation working properly. Checkout button present and functional."
 
   - task: "Cart Quantity Controls"
     implemented: true
