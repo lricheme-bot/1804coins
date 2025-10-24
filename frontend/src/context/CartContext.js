@@ -10,9 +10,11 @@ export const CartProvider = ({ children }) => {
   const { user } = useAuth();
 
   useEffect(() => {
+    console.log('[CartContext] User changed:', user);
     if (user) {
       fetchCart();
     } else {
+      console.log('[CartContext] No user, clearing cart');
       setCart({ items: [], total: 0, item_count: 0 });
     }
   }, [user]);
