@@ -174,8 +174,8 @@ const CustomGiftBuilder = () => {
                       <SelectValue placeholder="Choose a hero..." />
                     </SelectTrigger>
                     <SelectContent>
-                      {getAvailableCoins(index).map((coin) => (
-                        <SelectItem key={`${index}-${coin.id}`} value={coin.id} className="text-lg py-3">
+                      {getAvailableCoins(index).filter(coin => coin && coin.id).map((coin) => (
+                        <SelectItem key={coin.id} value={coin.id} className="text-lg py-3">
                           {coin.name} - {coin.year}
                         </SelectItem>
                       ))}
