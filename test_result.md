@@ -260,15 +260,15 @@ metadata:
 
 test_plan:
   current_focus:
+    - "Orders Page"
+    - "Checkout Process"
     - "Custom Gift Builder - Coin Selection"
-    - "Product Detail - Add to Cart"
-    - "Shopping Cart Page"
   stuck_tasks:
+    - "Orders Page"
+    - "Checkout Process"
     - "Custom Gift Builder - Coin Selection"
-    - "Product Detail - Add to Cart"
-    - "Shopping Cart Page"
   test_all: false
-  test_priority: "stuck_first"
+  test_priority: "high_first"
 
   - task: "Auth - Get Current User (/me) endpoint"
     implemented: true
