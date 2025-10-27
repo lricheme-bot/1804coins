@@ -58,11 +58,11 @@ const ProductCard = ({ product }) => {
             <div>
               {hasDiscount ? (
                 <div className="flex items-center justify-center gap-2">
-                  <p className="text-lg text-gray-500 line-through">${product.price.toFixed(2)}</p>
-                  <p className="text-xl font-bold text-red-600">${product.sale_price.toFixed(2)}</p>
+                  <p className="text-lg text-gray-500 line-through">${product.price?.toFixed(2) || '0.00'}</p>
+                  <p className="text-xl font-bold text-red-600">${product.sale_price?.toFixed(2) || '0.00'}</p>
                 </div>
               ) : (
-                <p className="text-xl font-bold text-gray-900">${product.price.toFixed(2)}</p>
+                <p className="text-xl font-bold text-gray-900">${product.price?.toFixed(2) || '0.00'}</p>
               )}
             </div>
           )}
